@@ -1,0 +1,2 @@
+'pedir numero entero
+'sacar factores de ese numero

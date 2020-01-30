@@ -1,0 +1,18 @@
+'int ladoA,ladoB;
+'read ladoA;
+pusha 0
+in
+store
+'read ladoB;
+pusha 2
+in
+store
+'print(ladoA+ladoB)*2;
+pusha 0
+load
+pusha 2
+load
+add
+push 2
+mul
+out

@@ -1,0 +1,17 @@
+'imprimir el menor de 3 numeros reales
+pusha 0
+inf
+storef
+pusha 4
+inf
+storef
+pusha 8
+inf
+storef
+'if (a<b)
+pusha 0
+load
+pusha 4
+load
+gtf
+jz amayor
