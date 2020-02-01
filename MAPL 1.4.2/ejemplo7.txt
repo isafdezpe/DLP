@@ -1,17 +1,44 @@
 'imprimir el menor de 3 numeros reales
+'float menor, num;
+'read menor;
 pusha 0
 inf
 storef
+'read num;
 pusha 4
 inf
 storef
-pusha 8
-inf
-storef
-'if (a<b)
+'if menor > num
 pusha 0
-load
+loadf
 pusha 4
-load
+loadf
 gtf
-jz amayor
+jz read
+'menor = num;
+pusha 0
+pusha 4 
+loadf
+storef
+'read num;
+read:
+pusha 4
+inf
+storef
+'if menor > num
+pusha 0
+loadf
+pusha 4
+loadf
+gtf
+jz print
+'menor = num;
+pusha 0
+pusha 4 
+loadf
+storef
+'print menor
+print:
+pusha 0
+loadf
+outf

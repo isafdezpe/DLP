@@ -1,2 +1,43 @@
-'pedir numero entero
-'sacar factores de ese numero
+'pedir numero entero y sacar factores de ese numero
+'int numero, i;
+'read numero;
+pusha 0
+in
+store
+'i=1;
+pusha 2
+push 1
+store
+while:
+'while (i<=numero) {
+pusha 2
+load
+pusha 0
+load
+le
+jz fin
+'if (numero%i==0)
+pusha 0
+load
+pusha 2
+load
+mod
+push 0
+eq
+jz incremento
+'print i;
+pusha 2
+load
+out
+pushb 10
+outb
+'i++; }
+incremento:
+pusha 2
+pusha 2
+load
+push 1
+add
+store
+jmp while
+fin:
