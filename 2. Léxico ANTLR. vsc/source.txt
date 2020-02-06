@@ -1,0 +1,11 @@
+24
+hola
++
+if /*
+k*/
+read
+//comentario
+/*
+hol
+*/
+3.65
