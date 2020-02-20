@@ -1,0 +1,34 @@
+//// ------------------------------
+//// DEFINICIONES de datos y tipos
+
+// Tipos simples ---------
+var a:int;
+var b:char;
+
+// Arrays ---------
+var c:[5] float;
+var h:[3][2] float;  // Pueden ser más de 2 dimensiones
+
+// Structs ------------- 
+struct Direccion {
+	portal:int;
+	codigoPostal:int;
+};
+
+var d1:Direccion;
+var d2:Direccion;
+
+struct Persona {
+	edad:int;
+	direccion:Direccion;
+};
+
+// Combinación de Arrays y Structs -------------
+var f:[6] Persona;
+
+struct Empresa {
+	cif:[9] char;
+	empleados:[10] Persona;
+};
+
+var microsoft: Empresa;
