@@ -25,11 +25,9 @@ expr
 	: INT_CONSTANT
 	| REAL_CONSTANT
 	| IDENT
-	| expr PLUS expr
-	| expr SUB expr
-	| expr MULT expr
-	| expr DIV expr
 	| OPEN_PAREN expr CLOSE_PAREN
+	| expr (MULT|DIV) expr
+	| expr (PLUS|SUB) expr
 	;
 	
 	
