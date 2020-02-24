@@ -7,7 +7,7 @@ var b:char;
 
 // Arrays ---------
 var c:[5] float;
-var h:[3][2] float;  // Pueden ser más de 2 dimensiones
+var h:[3][2] float;  // Pueden ser mï¿½s de 2 dimensiones
 
 // Structs ------------- 
 struct Direccion {
@@ -23,7 +23,7 @@ struct Persona {
 	direccion:Direccion;
 };
 
-// Combinación de Arrays y Structs -------------
+// Combinaciï¿½n de Arrays y Structs -------------
 var f:[6] Persona;
 
 struct Empresa {
@@ -32,3 +32,21 @@ struct Empresa {
 };
 
 var microsoft: Empresa;
+
+//// ------------------------------
+//// DEFINICIONES de funciones
+
+dobleSuma(a:int, b:int): int {
+	var local:int;
+
+	local = (a + b) * 2;
+	return local * 2;
+}
+
+escribeEdad(num:int) {
+	printsp microsoft.empleados[num].edad;
+}
+
+var z:int;	// Se puede definir entre funciones
+
+

@@ -34,3 +34,21 @@ defStruct
 defFunc
 	: IDENT '(' params? ')' (':' type)? '{' defVar* sentence* '}'
 	;
+	
+params
+	: IDENT ':' type | IDENT ':' type ',' params
+	;
+	
+sentence
+	: expr '=' expr
+	| 'read' expr ';'
+	| ('print' | 'printsp' | 'println') expr ';'
+	| 'return' expr ';'
+	;
+	
+expr
+	: '(' expr ')'
+	| expr ('*'|'/') expr
+	| expr ('+'|'-') expr
+	| expr '.' IDENT
+	;
