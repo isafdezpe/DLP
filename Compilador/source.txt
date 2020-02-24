@@ -1,52 +1,55 @@
-//// ------------------------------
-//// DEFINICIONES de datos y tipos
+/*
+ Hipoteca.txt v1.2
 
-// Tipos simples ---------
-var a:int;
-var b:char;
+- Programa de ejemplo que muestra las características del lenguaje
+- La sintaxis tiene que ser obligatoriamente la que se muestra en este ejemplo
 
-// Arrays ---------
-var c:[5] float;
-var h:[3][2] float;  // Pueden ser m�s de 2 dimensiones
+*/
 
-// Structs ------------- 
-struct Direccion {
-	portal:int;
-	codigoPostal:int;
-};
+potencia(base:float, exponente:int):float {
+	var total:float;
 
-var d1:Direccion;
-var d2:Direccion;
-
-struct Persona {
-	edad:int;
-	direccion:Direccion;
-};
-
-// Combinaci�n de Arrays y Structs -------------
-var f:[6] Persona;
-
-struct Empresa {
-	cif:[9] char;
-	empleados:[10] Persona;
-};
-
-var microsoft: Empresa;
-
-//// ------------------------------
-//// DEFINICIONES de funciones
-
-dobleSuma(a:int, b:int): int {
-	var local:int;
-
-	local = (a + b) * 2;
-	return local * 2;
+	if (exponente == 0) {
+		total = 1.0;
+	} else {
+		if (exponente < 0) {
+			total = 1.0 / potencia(base, 0 - exponente);
+		} else { 
+			total = base;
+			while (exponente > 1) {
+				total = total * base;
+				exponente = exponente - 1;
+			}
+		}
+	}
+	return total;
 }
 
-escribeEdad(num:int) {
-	printsp microsoft.empleados[num].edad;
+	
+letraHipoteca(capital:float, meses:int, interes:float):float {
+	var mensual:float;
+
+	mensual = interes / 12.0;
+	return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - meses)));
 }
 
-var z:int;	// Se puede definir entre funciones
 
+main() {
+	var precioVivienda:float;
+	var mesesHipoteca:int;
+	var interes:float;
 
+/*
+	read precioVivienda;
+	read mesesHipoteca;
+	read interes;
+*/
+	precioVivienda = 200000.0;
+	mesesHipoteca = 30 * 12;
+	interes = 2.04;	
+
+	print letraHipoteca(precioVivienda, mesesHipoteca, interes);
+
+//	Con los datos anteriores deberían salir (redondeando) 743 euros de letra al mes
+
+}

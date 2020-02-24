@@ -10,7 +10,6 @@ start
 
 definition
 	: defVar
-	| defStruct
 	| defFunc
 	;
 	
@@ -44,11 +43,23 @@ sentence
 	| 'read' expr ';'
 	| ('print' | 'printsp' | 'println') expr ';'
 	| 'return' expr ';'
+	| 'if' '(' expr ')' '{' sentence* '}' ('else' '{' sentence* '}')?
+	| 'while' '(' expr ')' '{' sentence* '}'
 	;
 	
 expr
-	: '(' expr ')'
+	: IDENT
+	| INT_CONSTANT
+	| REAL_CONSTANT
+	| CHAR_CONSTANT
+	| '(' expr ')'
 	| expr ('*'|'/') expr
 	| expr ('+'|'-') expr
+	| expr '[' expr ']'
 	| expr '.' IDENT
+	| expr ('<'|'>'|'<='|'>='|'=='|'!=') expr
+	| '!' expr
+	| expr '&&' expr
+	| expr '||' expr
+	| 'cast' '<' type '>' '(' expr ')'
 	;
