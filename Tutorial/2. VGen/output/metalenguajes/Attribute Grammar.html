@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Attribute Grammar (VGen)</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style type="text/css">
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .cabecera {
+            color: #FFFFFF;
+            background-color: #8DB3E2;
+        }
+
+        .nodo {
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .categoria {
+            color: #808080;
+        }
+
+        .nombreAtt {
+            font-style: italic;
+        }
+
+        .tipoAtt {
+            color: #808080;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Attribute Grammar</h2>
+    <table border="1" cellspacing="0">
+        <tr class="cabecera">
+            <td><strong>&nbsp;Nodo</strong></td>
+            <td><strong>&nbsp;Predicados&nbsp;</strong></td>
+            <td><strong>&nbsp;Reglas&nbsp;Semánticas&nbsp;</strong></td>
+        </tr>
+<tr><td><span class="nodo">program</span>&nbsp;&rarr;  <span class="nombreAtt">definitions</span><span class="tipoAtt">:varDefinition*</span> <span class="nombreAtt">sentences</span><span class="tipoAtt">:sentence*</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">varDefinition</span>&nbsp;&rarr;  <span class="nombreAtt">type</span><span class="tipoAtt">:type</span> <span class="nombreAtt">name</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td>&nbsp;</td><td></td><td></td></tr>
+
+<tr><td><span class="nodo">intType</span>:<span class="categoria">type</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
+<tr><td><span class="nodo">realType</span>:<span class="categoria">type</span>&nbsp;&rarr; &lambda;</td><td></td><td></td></tr>
+<tr><td>&nbsp;</td><td></td><td></td></tr>
+
+<tr><td><span class="nodo">print</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">expression</span><span class="tipoAtt">:expression</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">assignment</span>:<span class="categoria">sentence</span>&nbsp;&rarr;  <span class="nombreAtt">left</span><span class="tipoAtt">:expression</span> <span class="nombreAtt">right</span><span class="tipoAtt">:expression</span></td><td></td><td></td></tr>
+<tr><td>&nbsp;</td><td></td><td></td></tr>
+
+<tr><td><span class="nodo">arithmeticExpression</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">left</span><span class="tipoAtt">:expression</span> <span class="nombreAtt">operator</span><span class="tipoAtt">:String</span> <span class="nombreAtt">right</span><span class="tipoAtt">:expression</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">variable</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">name</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">intConstant</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">value</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td><span class="nodo">realConstant</span>:<span class="categoria">expression</span>&nbsp;&rarr;  <span class="nombreAtt">value</span><span class="tipoAtt">:String</span></td><td></td><td></td></tr>
+<tr><td>&nbsp;</td><td></td><td></td></tr>
+
+
+    </table>
+
+    <br>
+    Recordatorio de los operadores (para cortar y pegar): &rArr; &hArr; &ne; &empty; &isin; &notin; &cup; &cap; &sub; &nsub; &sum; &exist; &forall;
+    <h3>Atributos</h3>
+    <table border="1" cellspacing="0">
+        <tr class="cabecera">
+            <td>&nbsp;<strong>Nodo/Categoría Sintáctica</strong>&nbsp;</td>
+            <td>&nbsp;<strong>Nombre del Atributo</strong>&nbsp;</td>
+            <td>&nbsp;<strong>Tipo Java</strong>&nbsp;</td>
+            <td>&nbsp;<strong>Heredado/Sintetizado</strong>&nbsp;</td>
+            <td>&nbsp;<strong>Descripción</strong>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TestLexer",
+            "request": "launch",
+            "mainClass": "parser.TestLexer",
+            "projectName": "z"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopOnEntry": false,
+            "mainClass": "main.Main",
+            "args": "",
+            "projectName": "z"
+        }
+    ]
+}

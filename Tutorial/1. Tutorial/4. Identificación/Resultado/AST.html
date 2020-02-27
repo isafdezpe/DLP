@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #bebdbd; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Program &rarr;                                                   <span class="pos">2:8  8:17    </span><span class="sourceText">float </span><span class="posText">precio;</span><span class="sourceText"> ... </span><span class="posText">print nodefinida</span><span class="sourceText">;	// Error: variable NO definida</span>
+<span class="dots">.  </span>definitions  <span class="type">List&lt;VarDefinition&gt;</span> = 
+<span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">2:8  2:13    </span><span class="sourceText">float </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">RealType</span> &rarr;                                         <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>"<span class="value">precio</span>"  
+<span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">3:6  3:11    </span><span class="sourceText">int </span><span class="posText">precio</span><span class="sourceText">;	// Error: variable YA definida</span>
+<span class="dots">.  .  |  </span><span class="value">IntType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>"<span class="value">precio</span>"  
+<span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">4:6  4:10    </span><span class="sourceText">int </span><span class="posText">ancho</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">IntType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>"<span class="value">ancho</span>"  
+<span class="dots">.  </span>sentences  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  </span>Print &rarr;                                               <span class="pos">7:8  7:13    </span><span class="sourceText">print </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"precio"  <span class="type">Variable.name</span>                            <span class="pos">7:8  7:13    </span><span class="sourceText">print </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">.  .  </span>Print &rarr;                                               <span class="pos">8:8  8:17    </span><span class="sourceText">print </span><span class="posText">nodefinida</span><span class="sourceText">;	// Error: variable NO definida</span>
+<span class="dots">.  .  |  </span>"nodefinida"  <span class="type">Variable.name</span>                        <span class="pos">8:8  8:17    </span><span class="sourceText">print </span><span class="posText">nodefinida</span><span class="sourceText">;	// Error: variable NO definida</span>
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>

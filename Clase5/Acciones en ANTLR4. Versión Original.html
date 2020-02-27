@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Acciones en ANTLR4. Versión Original.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <style>
+        /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+        body {
+            font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+            font-size: 14px;
+            padding: 0 12px;
+            line-height: 22px;
+            word-wrap: break-word;
+        }
+
+        #code-csp-warning {
+            position: fixed;
+            top: 0;
+            right: 0;
+            color: white;
+            margin: 16px;
+            text-align: center;
+            font-size: 12px;
+            font-family: sans-serif;
+            background-color: #444444;
+            cursor: pointer;
+            padding: 6px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+        }
+
+        #code-csp-warning:hover {
+            text-decoration: none;
+            background-color: #007acc;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+        }
+
+
+        body.scrollBeyondLastLine {
+            margin-bottom: calc(100vh - 22px);
+        }
+
+        body.showEditorSelection .code-line {
+            position: relative;
+        }
+
+        body.showEditorSelection .code-active-line:before,
+        body.showEditorSelection .code-line:hover:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: -12px;
+            height: 100%;
+        }
+
+        body.showEditorSelection li.code-active-line:before,
+        body.showEditorSelection li.code-line:hover:before {
+            left: -30px;
+        }
+
+        .vscode-light.showEditorSelection .code-active-line:before {
+            border-left: 3px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .vscode-light.showEditorSelection .code-line:hover:before {
+            border-left: 3px solid rgba(0, 0, 0, 0.40);
+        }
+
+        .vscode-dark.showEditorSelection .code-active-line:before {
+            border-left: 3px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .vscode-dark.showEditorSelection .code-line:hover:before {
+            border-left: 3px solid rgba(255, 255, 255, 0.60);
+        }
+
+        .vscode-high-contrast.showEditorSelection .code-active-line:before {
+            border-left: 3px solid rgba(255, 160, 0, 0.7);
+        }
+
+        .vscode-high-contrast.showEditorSelection .code-line:hover:before {
+            border-left: 3px solid rgba(255, 160, 0, 1);
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        a {
+            color: #4080D0;
+            text-decoration: none;
+        }
+
+        a:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 1px solid -webkit-focus-ring-color;
+            outline-offset: -1px;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            border-bottom: 2px solid;
+        }
+
+        h1 {
+            padding-bottom: 0.3em;
+            line-height: 1.2;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: normal;
+        }
+
+        h1 code,
+        h2 code,
+        h3 code,
+        h4 code,
+        h5 code,
+        h6 code {
+            font-size: inherit;
+            line-height: auto;
+        }
+
+        a:hover {
+            color: #4080D0;
+            text-decoration: underline;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table>thead>tr>th {
+            text-align: left;
+            border-bottom: 1px solid;
+        }
+
+        table>thead>tr>th,
+        table>thead>tr>td,
+        table>tbody>tr>th,
+        table>tbody>tr>td {
+            padding: 5px 10px;
+        }
+
+        table>tbody>tr+tr>td {
+            border-top: 1px solid;
+        }
+
+        blockquote {
+            margin: 0 7px 0 5px;
+            padding: 0 16px 0 10px;
+            border-left: 5px solid;
+        }
+
+        code {
+            font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+            font-size: 14px;
+            line-height: 19px;
+        }
+
+        body.wordWrap pre {
+            white-space: pre-wrap;
+        }
+
+        .mac code {
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        pre:not(.hljs),
+        pre.hljs code>div {
+            padding: 16px;
+            border-radius: 3px;
+            overflow: auto;
+        }
+
+        /** Theming */
+
+        .vscode-light,
+        .vscode-light pre code {
+            color: rgb(30, 30, 30);
+        }
+
+        .vscode-dark,
+        .vscode-dark pre code {
+            color: #DDD;
+        }
+
+        .vscode-high-contrast,
+        .vscode-high-contrast pre code {
+            color: white;
+        }
+
+        .vscode-light code {
+            color: #A31515;
+        }
+
+        .vscode-dark code {
+            color: #D7BA7D;
+        }
+
+        .vscode-light pre:not(.hljs),
+        .vscode-light code>div {
+            background-color: rgba(220, 220, 220, 0.4);
+        }
+
+        .vscode-dark pre:not(.hljs),
+        .vscode-dark code>div {
+            background-color: rgba(10, 10, 10, 0.4);
+        }
+
+        .vscode-high-contrast pre:not(.hljs),
+        .vscode-high-contrast code>div {
+            background-color: rgb(0, 0, 0);
+        }
+
+        .vscode-high-contrast h1 {
+            border-color: rgb(0, 0, 0);
+        }
+
+        .vscode-light table>thead>tr>th {
+            border-color: rgba(0, 0, 0, 0.69);
+        }
+
+        .vscode-dark table>thead>tr>th {
+            border-color: rgba(255, 255, 255, 0.69);
+        }
+
+        .vscode-light h1,
+        .vscode-light hr,
+        .vscode-light table>tbody>tr+tr>td {
+            border-color: rgba(0, 0, 0, 0.18);
+        }
+
+        .vscode-dark h1,
+        .vscode-dark hr,
+        .vscode-dark table>tbody>tr+tr>td {
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .vscode-light blockquote,
+        .vscode-dark blockquote {
+            background: rgba(127, 127, 127, 0.1);
+            border-color: rgba(0, 122, 204, 0.5);
+        }
+
+        .vscode-high-contrast blockquote {
+            background: transparent;
+            border-color: #fff;
+        }
+    </style>
+
+    <style>
+        /* Tomorrow Theme */
+        /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+        /* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+        /* Tomorrow Comment */
+        .hljs-comment,
+        .hljs-quote {
+            color: #8e908c;
+        }
+
+        /* Tomorrow Red */
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-tag,
+        .hljs-name,
+        .hljs-selector-id,
+        .hljs-selector-class,
+        .hljs-regexp,
+        .hljs-deletion {
+            color: #c82829;
+        }
+
+        /* Tomorrow Orange */
+        .hljs-number,
+        .hljs-built_in,
+        .hljs-builtin-name,
+        .hljs-literal,
+        .hljs-type,
+        .hljs-params,
+        .hljs-meta,
+        .hljs-link {
+            color: #f5871f;
+        }
+
+        /* Tomorrow Yellow */
+        .hljs-attribute {
+            color: #eab700;
+        }
+
+        /* Tomorrow Green */
+        .hljs-string,
+        .hljs-symbol,
+        .hljs-bullet,
+        .hljs-addition {
+            color: #718c00;
+        }
+
+        /* Tomorrow Blue */
+        .hljs-title,
+        .hljs-section {
+            color: #4271ae;
+        }
+
+        /* Tomorrow Purple */
+        .hljs-keyword,
+        .hljs-selector-tag {
+            color: #8959a8;
+        }
+
+        .hljs {
+            display: block;
+            overflow-x: auto;
+            color: #4d4d4c;
+            padding: 0.5em;
+        }
+
+        .hljs-emphasis {
+            font-style: italic;
+        }
+
+        .hljs-strong {
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        /*
+ * Markdown PDF CSS
+ */
+
+        body {
+            font-family: "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+        }
+
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+
+        pre:not(.hljs) {
+            padding: 23px;
+            line-height: 19px;
+        }
+
+        blockquote {
+            background: rgba(127, 127, 127, 0.1);
+            border-color: rgba(0, 122, 204, 0.5);
+        }
+
+        .emoji {
+            height: 1.4em;
+        }
+
+        /* for inline code */
+        :not(pre):not(.hljs)>code {
+            color: #C9AE75;
+            /* Change the old color so it seems less like an error */
+            font-size: inherit;
+        }
+
+        /* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+        .page {
+            page-break-after: always;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+                ? 'dark'
+                : 'default'
+        });
+    </script>
+    <h1 id="acceso-a-atributos-en-las-acciones-de-antlr">Acceso a Atributos en las Acciones de ANTLR</h1>
+    <blockquote>
+        <p>Resumen realizado para la asignatura de <em>Diseño de Lenguajes de Programación</em> de la <em>Escuela de Ingeniería Informática</em> de la <em>Universidad de Oviedo</em>.</p>
+        <p>Raúl Izquierdo Castanedo (raul@uniovi.es)</p>
+    </blockquote>
+    <!-- TOC -->
+    <ul>
+        <li><a href="#el-objeto-contexto-de-una-regla">El Objeto Contexto de una Regla</a></li>
+        <li><a href="#acceso-a-atributos-de-la-propia-regla">Acceso a Atributos de la propia Regla</a></li>
+        <li><a href="#acceso-a-los-atributos-de-los-s%C3%ADmbolos-en-el-consecuente-de-la-regla">Acceso a los Atributos de los Símbolos en el Consecuente de la Regla</a>
+            <ul>
+                <li><a href="#acceso-a-atributos-de-s%C3%ADmbolos-terminales">Acceso a Atributos de Símbolos Terminales</a>
+                    <ul>
+                        <li><a href="#terminales-simples">Terminales Simples</a></li>
+                        <li><a href="#terminales-repetidos-en-la-regla">Terminales Repetidos en la Regla</a>
+                            <ul>
+                                <li><a href="#opci%C3%B3n-1-sub%C3%ADndices">Opción 1. Subíndices</a></li>
+                                <li><a href="#opci%C3%B3n-2-etiquetas">Opción 2. Etiquetas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#terminales-opcionales-operador-">Terminales Opcionales (operador <code>?</code>)</a></li>
+                        <li><a href="#terminales-repetidos-una-o-m%C3%A1s-veces-operador-">Terminales Repetidos una o más veces (operador <code>+</code>)</a></li>
+                        <li><a href="#terminales-repetidos-cero-o-m%C3%A1s-veces-operador-">Terminales Repetidos cero o más veces (operador <code>*</code>)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#acceso-a-atributos-de-s%C3%ADmbolos-no-terminales">Acceso a Atributos de Símbolos No Terminales</a>
+                    <ul>
+                        <li><a href="#no-terminales-repetidos-en-la-regla">No-Terminales Repetidos en la Regla</a>
+                            <ul>
+                                <li><a href="#opci%C3%B3n-1-acceso-con-sub%C3%ADndices">Opción 1. Acceso con Subíndices</a></li>
+                                <li><a href="#opci%C3%B3n-2-acceso-con-etiquetas">Opción 2. Acceso con Etiquetas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#no-terminales-opcionales-operador-">No-Terminales Opcionales (operador <code>?</code>)</a></li>
+                        <li><a href="#no-terminales-repetidos-una-o-m%C3%A1s-veces-operador-">No-terminales Repetidos una o más veces (operador <code>+</code>)</a></li>
+                        <li><a href="#no-terminales-repetidos-cero-o-m%C3%A1s-veces-operador-">No-terminales Repetidos cero o más veces (operador <code>*</code>)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#creaci%C3%B3n-de-listas-java-en-antlr">Creación de Listas Java en ANTLR</a>
+            <ul>
+                <li><a href="#versi%C3%B3n-simple">Versión Simple</a></li>
+                <li><a href="#versi%C3%B3n-avanzada">Versión Avanzada</a></li>
+            </ul>
+        </li>
+    </ul>
+    <!-- /TOC -->
+    <h2 id="el-objeto-contexto-de-una-regla">El Objeto Contexto de una Regla</h2>
+    <p>Para una regla de nombre <code>abc</code>, ANTLR crearía:</p>
+    <ol>
+        <li>En <em>GrammarParser.java</em>, un método de nombre <code>abc()</code> que devolverá un objeto de la clase <code>AbcContext</code>.</li>
+        <li>La clase <code>AbcContext</code>, la cual derivará de la clase común para todas las reglas llamada <code>ParserRuleContext</code>. Un objeto de esta clase, denominado el <strong>contexto</strong> de <em>abc</em>, será el que se utilice para guardar toda la información necesaria durante la ejecución de la regla y será también el que, al acabar la misma, se devuelva como valor de retorno.</li>
+    </ol>
+    <p>Por ejemplo, para el no-terminal <em>expr</em></p>
+    <pre class="hljs"><code><div>expr: ... ;
+</div></code></pre>
+    <p>se crearía lo siguiente:</p>
+    <pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GrammarParser</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ExprContext <span class="hljs-title">expr</span><span class="hljs-params">()</span>  </span>{
+        ExprContext ctx = <span class="hljs-keyword">new</span> ExprContext(...);
+        ...
+
+        <span class="hljs-keyword">return</span> ctx;
+    }
+    ...
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExprContext</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ParserRuleContext</span> </span>{
+    ...
+}
+</div></code></pre>
+    <p>El contexto contendrá (entre otras cosas):</p>
+    <ul>
+        <li>El atributo donde se dejará el valor de retorno de la regla (el habitual <code>ast</code>).</li>
+        <li>Los objetos asociados a todos los símbolos del consecuente (parte derecha) de la regla: sus Tokens (si son terminales) o los contextos que a su vez éstos devuelvan (si son no-terminales).</li>
+        <li>Las variables locales que se definan en la regla con <code>locals</code>.</li>
+    </ul>
+    <p>Por ejemplo, una regla como la siguiente:</p>
+    <pre class="hljs"><code><div>abc returns[String val]
+	: IDENT b;
+</div></code></pre>
+    <p>Generaría (simplificando) un contexto llamado <em>AbcContext</em>:</p>
+    <pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbcContext</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ParserRuleContext</span> </span>{
+    <span class="hljs-keyword">public</span> String val;      <span class="hljs-comment">// Retorno</span>
+    <span class="hljs-keyword">public</span> Token IDENT;     <span class="hljs-comment">// Hijo 1</span>
+    <span class="hljs-keyword">public</span> BContext b;      <span class="hljs-comment">// Hijo 2</span>
+}
+</div></code></pre>
+    <h2 id="acceso-a-atributos-de-la-propia-regla">Acceso a Atributos de la propia Regla</h2>
+    <p>Para acceder a los atributos del contexto actual (objeto <code>AbcContext</code>) desde la propia regla <code>abc</code>, basta con poner directamente <code>$atributo</code>:</p>
+    <pre class="hljs"><code><div>abc returns[String val]
+	: IDENT b { $val = &quot;adios&quot;; };
+</div></code></pre>
+    <p>Si se quiere una referencia al <em>contexto</em> completo (al objeto <code>AbcContext</code>), hay que poner <code>$ctx</code>.</p>
+    <pre class="hljs"><code><div>abc returns[String val]
+	: IDENT b { System.out.println($ctx); }; // AbcContext.toString()
+</div></code></pre>
+    <p>De hecho, cuando se accede a los atributos, ANTLR internamente está poniendo <code>ctx</code> antes de cada uno. Por tanto, las dos siguientes reglas son idénticas:</p>
+    <pre class="hljs"><code><div>abc returns[String val]
+	: IDENT b { $ctx.val = &quot;adios&quot;; };
+</div></code></pre>
+    <pre class="hljs"><code><div>abc returns[String val]
+	: IDENT b { $val = &quot;adios&quot;; };  // ANTLR pone los &quot;ctx.&quot; por nosotros
+</div></code></pre>
+    <h2 id="acceso-a-los-atributos-de-los-s%C3%ADmbolos-en-el-consecuente-de-la-regla">Acceso a los Atributos de los Símbolos en el Consecuente de la Regla</h2>
+    <p>Ahora se tratará, en vez de cómo acceder a los atributos de la propia regla, el cómo acceder a los atributos de los símbolos que están en la parte derecha de la regla (los símbolos <em>hijos</em> de la regla).</p>
+    <p>La forma de acceder (y el valor obtenido), depende de que el símbolo sea terminal o no-terminal.</p>
+    <h3 id="acceso-a-atributos-de-s%C3%ADmbolos-terminales">Acceso a Atributos de Símbolos Terminales</h3>
+    <h4 id="terminales-simples">Terminales Simples</h4>
+    <pre class="hljs"><code><div>a: IDENT { System.out.println($IDENT); } // Objeto Token
+</div></code></pre>
+    <p>La notación <em>$símbolo</em>, siendo el símbolo un terminal, devuelve un objeto la clase Token (y, por tanto, se pueden invocar sobre él todos los métodos de esta clase). El método más usado de dicha clase será <code>getText()</code> para obtener el lexema del token. Por ello, ANTLR permite el atajo de poner <code>$símbolo.text</code> y él lo sustituirá por <code>$símbolo.getText()</code>.</p>
+    <pre class="hljs"><code><div>a: IDENT { System.out.println($IDENT.text); } // Equivale a `$IDENT.getText()`
+</div></code></pre>
+    <p>Aunque se incluyen los demás casos por presentar todas las opciones, el ejemplo anterior <em>será lo que se use la inmensa mayoría de las veces</em> para acceder a un <em>terminal</em>. De hecho, se podría pasar ya al apartado de <a href="#acceso-a-atributos-de-s%C3%ADmbolos-no-terminales">Acceso a Atributos de Símbolos No Terminales</a>.</p>
+    <h4 id="terminales-repetidos-en-la-regla">Terminales Repetidos en la Regla</h4>
+    <p>Si hay varios terminales con el mismo nombre, si se pone dicho nombre sólo se accederá al último de ellos.</p>
+    <pre class="hljs"><code><div>a: IDENT IDENT { System.out.println($IDENT); } // Segundo IDENT
+</div></code></pre>
+    <p>Para acceder a cualquier otro token, hay dos opciones: subíndices y etiquetas.</p>
+    <h5 id="opci%C3%B3n-1-sub%C3%ADndices">Opción 1. Subíndices</h5>
+    <p>Los subíndices empiezan en 0.</p>
+    <pre class="hljs"><code><div>a: IDENT IDENT { System.out.println($IDENT(0)); } // Primer IDENT
+</div></code></pre>
+    <p>En este caso, ANTLR <em>no permite</em> usar el atajo <code>$IDENT(0).text</code> para acceder al lexema, por lo que hay que poner la expresión completa <code>$IDENT(0).getText()</code>.</p>
+    <h5 id="opci%C3%B3n-2-etiquetas">Opción 2. Etiquetas</h5>
+    <p>La alternativa a usar subíndices es usar etiquetas que identifiquen el terminal al que nos referimos:</p>
+    <pre class="hljs"><code><div>a: id1=IDENT id2=IDENT { System.out.println($id1.text); }
+</div></code></pre>
+    <p>En este caso, se puede volver a usar el atajo <code>$id1.text</code> para obtener el lexema.</p>
+    <h4 id="terminales-opcionales-operador">Terminales Opcionales (operador <code>?</code>)</h4>
+    <p>Si el token es opcional (operador <code>?</code>), entonces puede que no aparezca en la entrada. Si esto ocurre, al acceder a él se obtendrá:</p>
+    <ul>
+        <li><code>null</code> si se accede con <code>$&lt;token&gt;</code> o <code>$&lt;token&gt;.text</code>.
+            <pre class="hljs"><code><div>a: IDENT? INT { System.out.println($IDENT); }	// null si no hay IDENT
+</div></code></pre>
+            <pre class="hljs"><code><div>a: IDENT? INT { System.out.println($IDENT.text); }  // null si no hay IDENT
+</div></code></pre>
+        </li>
+        <li>Una excepción <code>NullPointerException</code> si se accede con <code>$&lt;ident&gt;.getText()</code>.
+            <pre class="hljs"><code><div>a: IDENT? INT { System.out.println($IDENT.getText()); }	// NullPointerException
+</div></code></pre>
+        </li>
+    </ul>
+    <h4 id="terminales-repetidos-una-o-m%C3%A1s-veces-operador">Terminales Repetidos una o más veces (operador <code>+</code>)</h4>
+    <p>Si se accede a un token al que se le ha aplicado <code>+</code>, se está accediendo sólo al último token de la serie. Supóngase la siguiente entrada:</p>
+    <pre class="hljs"><code><div>2 a b c 3
+</div></code></pre>
+    <p>La siguiente acción imprimiría el lexema <code>c</code>:</p>
+    <pre class="hljs"><code><div>start: INT IDENT+ INT { System.out.println($IDENT.text); }; // Imprime &quot;c&quot;
+</div></code></pre>
+    <p>Si se quisieran obtener todos los <code>IDENT</code>, habría que mover la acción <em>dentro</em> del operador <code>+</code> para que se ejecute cada vez que se repite el elemento:</p>
+    <pre class="hljs"><code><div>start: INT (IDENT { System.out.println($IDENT.text); })+ INT;
+ // Imprime &quot;a b c&quot;
+</div></code></pre>
+    <p>Esto, sin embargo, hace que la regla sea más difícil de leer, ya que mezcla los símbolos de la regla con el código Java.</p>
+    <p>Otra opción sería indicar a ANTLR que nos guarde automáticamente todos los tokens de la repetición en una lista (<code>List&lt;Token&gt;</code>) y que nos deje dicha lista en el contexto de la regla. Para ello, habría que poner antes del token que se repite el nombre que se le quiere dar a la lista seguido del operador <code>+=</code>.</p>
+    <pre class="hljs"><code><div>start: INT ids+=IDENT+ INT { System.out.println($ids); } // ids es una lista
+</div></code></pre>
+    <p>Si se quisiera acceder a cada uno de los elementos, se recorrería como cualquier <code>List</code> de Java. Por ejemplo:</p>
+    <pre class="hljs"><code><div>start: INT ids+=IDENT+ INT
+        { for (Token tok : $ids) { System.out.println(tok.getText()); }};
+</div></code></pre>
+    <p>Esta opción permite unas reglas más limpias al tener todo el código Java al final de las mismas (y no intercaladas entre los símbolos).</p>
+    <h4 id="terminales-repetidos-cero-o-m%C3%A1s-veces-operador">Terminales Repetidos cero o más veces (operador <code>*</code>)</h4>
+    <p>Si se accede a un token al que se le ha aplicado <code>*</code>, el valor obtenido será:</p>
+    <ul>
+        <li>Si se ha usado el operador <code>+=</code>, siempre devolverá una lista, aunque esté vacía (ver operador <code>+</code> en el apartado anterior).
+            <pre class="hljs"><code><div>start: INT ids+=IDENT* INT // ids siempre será una List&lt;Token&gt;
+</div></code></pre>
+        </li>
+        <li>Si no se ha usado <code>+=</code>, depende de cuántas veces se halle dicho elemento en la entrada:
+            <pre class="hljs"><code><div>start: INT IDENT* INT // $IDENT puede ser null o Token
+</div></code></pre>
+            <ul>
+                <li>Si hay <em>cero</em> elementos, se comporta igual que el operador <code>?</code> (<code>$IDENT</code> y <code>$IDENT.text</code> devuelven <code>null</code> y <code>$IDENT.getText()</code> lanza una excepción).</li>
+                <li>Si hay algún elememento en la entrada, se comporta igual que el operador <code>+</code> (si no se quiere acceder sólo al último elemento, hay que poner la acción <em>dentro</em> del <code>*</code>).</li>
+            </ul>
+        </li>
+    </ul>
+    <h3 id="acceso-a-atributos-de-s%C3%ADmbolos-no-terminales">Acceso a Atributos de Símbolos No Terminales</h3>
+    <p>Pasamos ahora a los hijos no-terminales. Cuando el símbolo <code>b</code> es un no-terminal, en el código que genera ANTLR en el Parser, la llamada a <code>b()</code> devuelve su contexto. Para acceder a dicho objeto, siendo coherente con cómo se accede a los tokens, podría parecer que debería poder accederse mediante <code>$b</code>. Sin embargo, esto no es así (por algún motivo que ANTLR no especifica):</p>
+    <pre class="hljs"><code><div>a: b { System.out.println($b); }	// Error. ANTLR no lo permite
+</div></code></pre>
+    <p>En su lugar, para acceder a dicho contexto, hay que poner <code>$b.ctx</code>.</p>
+    <pre class="hljs"><code><div>a: b { System.out.println($b.ctx); }	// Ok. BParserRuleContext.toString()
+</div></code></pre>
+    <p>A la hora de acceder a un atributo de dicho contexto, se podrá poner <code>$b.ctx.atributo</code> o bien, lo que será más habitual, poner ya directamente el atributo sin poner <code>ctx</code> (ANTLR ya añadirá el prefijo <em>ctx</em> a dicho atributo). Ejemplo:</p>
+    <pre class="hljs"><code><div>a: b { System.out.println($b.val); };    // Equivale a `$b.ctx.val`
+
+b returns[String val]
+    : IDENT { $val = $IDENT.text; };
+</div></code></pre>
+    <p>En resumen:</p>
+    <ul>
+        <li>Para acceder a un atributo de un símbolo:
+            <ul>
+                <li>Es válido tanto <code>$b.&lt;atributo&gt;</code> como <code>$b.ctx.&lt;atributo&gt;</code>.</li>
+            </ul>
+        </li>
+        <li>Para acceder al objeto contexto (el que tiene todos los atributos):
+            <ul>
+                <li>Es válido <code>$b.ctx</code>.</li>
+                <li>No es válido <code>$b</code>.</li>
+            </ul>
+        </li>
+    </ul>
+    <p>Aunque a continuación se incluyen los demás casos por presentar todas las opciones de los no-termnales, el ejemplo anterior <em>será lo que se use la inmensa mayoría de las veces</em> para acceder a un <em>no-terminal</em>.</p>
+    <h4 id="no-terminales-repetidos-en-la-regla">No-Terminales Repetidos en la Regla</h4>
+    <p>Si hay varios no-terminales con el mismo nombre, mediante dicho nombre sólo se accede al último de ellos:</p>
+    <pre class="hljs"><code><div>a: b b { System.out.println($b.val); }; // La segunda b
+
+b returns[String val]
+	: IDENT { $val = $IDENT.text; };
+</div></code></pre>
+    <p>Para acceder a cualquier otro token, hay dos opciones: subíndices y etiquetas.</p>
+    <h5 id="opci%C3%B3n-1-acceso-con-sub%C3%ADndices">Opción 1. Acceso con Subíndices</h5>
+    <p>Los subíndices empiezan en 0.</p>
+    <pre class="hljs"><code><div>a: b b { System.out.println($ctx.b(0)); }; // BContext de la primera `b`
+</div></code></pre>
+    <p>Sin embargo, lo más habitual será acceder directamente al atributo con el valor de retorno:</p>
+    <pre class="hljs"><code><div>a: b b { System.out.println($ctx.b(0).val); }; // String
+
+b returns[String val]
+	: IDENT { $val = $IDENT.text; };
+</div></code></pre>
+    <p>Nótese que, a diferencia de con los terminales, es obligatorio poner <em>$ctx</em> antes del nombre del símbolo.</p>
+    <h5 id="opci%C3%B3n-2-acceso-con-etiquetas">Opción 2. Acceso con Etiquetas</h5>
+    <p>Usar etiquetas. Este caso si que es igual que con los terminales.</p>
+    <pre class="hljs"><code><div>a: id1=b id2=b { System.out.println($id1.val); };
+</div></code></pre>
+    <h4 id="no-terminales-opcionales-operador">No-Terminales Opcionales (operador <code>?</code>)</h4>
+    <p>Si un hijo no-terminal es opcional, puede no aparecer en la entrada. Si esto ocurre, al acceder a su contexto se obtendrá null. Por tanto, <em>no se podría</em> hacer lo siguiente, ya que produciría un <code>NullPointerException</code> cuando en la entrada no esté <code>b</code>:</p>
+    <pre class="hljs"><code><div>a: b? INT { System.out.println($b.val); }  // Excepción si no está b!!!
+
+b returns[String val]
+	: IDENT { $val = $IDENT.text; };
+</div></code></pre>
+    <p>Si se necesita saber si un no-terminal opcional ha aparecido o no, se deberá comprobar si su contexto vale <code>null</code>:</p>
+    <pre class="hljs"><code><div>a: b? INT { System.out.println($b.ctx == null); }  // true si no hay `b`
+</div></code></pre>
+    <p>Nótese que, en una inconsistencia más de ANTLR, a diferencia de cómo se hacia con los terminales y como se vió en el apartado anterior, aquí no se puede hacer:</p>
+    <pre class="hljs"><code><div>a: b? INT { System.out.println($b == null); };
+</div></code></pre>
+    <h4 id="no-terminales-repetidos-una-o-m%C3%A1s-veces-operador">No-terminales Repetidos una o más veces (operador <code>+</code>)</h4>
+    <p>Si se accede a un no-terminal al que se le ha aplicado <code>+</code>, se está accediendo sólo al último elemento de la serie. Supóngase la siguiente entrada:</p>
+    <pre class="hljs"><code><div>2 a b c 3
+</div></code></pre>
+    <p>La siguiente acción imprimiría el lexema <code>c</code>:</p>
+    <pre class="hljs"><code><div>start: INT a+ INT { System.out.println($IDENT.text); }; // Imprime &quot;c&quot;
+
+a returns[String val]
+	: IDENT { $val = $IDENT.text; };
+</div></code></pre>
+    <p>Si se quisieran obtener todos los valores devueltos por <code>a</code>, habría que mover la acción <em>dentro</em> del operador <code>+</code>, para que se ejecute con cada elemento que se encuentre:</p>
+    <pre class="hljs"><code><div>start: INT (a {System.out.println($a.val); })+ INT; // a b c
+</div></code></pre>
+    <p>Esto, sin embargo, hace que la regla sea más difícil de leer, ya que mezcla los símbolos de la regla con el código Java.</p>
+    <p>Otra opción sería indicar a ANTLR que nos guarde automáticamente todos los elementos de la repetición en una lista (<code>List&lt;ParserRuleContext&gt;</code>) y que nos deje dicha lista en el contexto de la regla. Para ello, habría que poner antes del token que se repite el nombre que se le quiere dar a la lista seguido del operador <code>+=</code>.</p>
+    <pre class="hljs"><code><div>start: INT l+=a+ INT { System.out.println($l); } // `l` es una lista
+
+a returns[String val]
+	: IDENT { $val = $IDENT.text; };
+</div></code></pre>
+    <p>Si se quisiera acceder a cada uno de los elementos, se recorrería como cualquier <code>List</code> de Java. Por ejemplo:</p>
+    <pre class="hljs"><code><div>start: INT l+=a+ INT { for (AContext ctx : $l) { System.out.println(ctx.val); } }
+</div></code></pre>
+    <p>Esta opción permite unas reglas más limpias al tener todo el código Java al final de las mismas (y no intercaladas entre los símbolos)</p>
+    <p>Otro ejemplo sería:</p>
+    <pre class="hljs"><code><div>start: l+=expr (',' l+=expr)*
+        { for (ExprContext ctx : $l) { System.out.println(ctx.ast); }};
+</div></code></pre>
+    <h4 id="no-terminales-repetidos-cero-o-m%C3%A1s-veces-operador">No-terminales Repetidos cero o más veces (operador <code>*</code>)</h4>
+    <p>Si se accede a un no-terminal al que se le ha aplicado <code>*</code>, el valor obtenido será:</p>
+    <ul>
+        <li>Si se ha usado el operador <code>+=</code>, siempre devolverá una lista, aunque esté vacía (ver operador <code>+</code> en el apartado anterior).
+            <pre class="hljs"><code><div>start: INT l+=a* INT // `l` siempre será una List&lt;AContext&gt;
+</div></code></pre>
+        </li>
+        <li>Si no se ha usado <code>+=</code>, depende de cuántas veces se halle dicho elemento en la entrada:
+            <pre class="hljs"><code><div>start: INT a* INT // $a.val puede lanzar excepción
+
+a returns[String val]
+    : IDENT { $val = $IDENT.text; };
+</div></code></pre>
+            <ul>
+                <li>Si hay <em>cero</em> elementos, se comporta igual que el operador <code>?</code> (<code>$a.ctx</code> valdrá <code>null</code> y <code>$a.val</code> lanzará una excepción)</li>
+                <li>Si hay algún elememento en la entrada, se comporta igual que el operador <code>+</code> (si no se quiere acceder sólo al último elemento, hay que poner la acción <em>dentro</em> del <code>*</code>)</li>
+            </ul>
+        </li>
+    </ul>
+    <h2 id="creaci%C3%B3n-de-listas-java-en-antlr">Creación de Listas Java en ANTLR</h2>
+    <p>A continuación se muestran las acciones asociadas que hay que añadir a los patrones BNF.</p>
+    <h3 id="versi%C3%B3n-simple">Versión Simple</h3>
+    <p>Se crea a mano una lista y se añade la acción que va insertando cada elemento. El siguiente ejemplo muestra cómo se crearía una lista de sentencias:</p>
+    <pre class="hljs"><code><div>start returns[Program ast]
+	: 'CODE' sentences { $ast = new Program($sentences.list); }
+	;
+
+sentences returns[List&lt;Sentence&gt; list = new ArrayList&lt;Sentence&gt;()]
+	: (sentence { $list.add($sentence.ast); })*
+	;
+
+sentence returns[Sentence ast]
+	: 'print' expr ';'	{ $ast = new Print($expr.ast); }
+	| expr '=' expr ';'	{ $ast = new Assignment($ctx.expr(0).ast, $ctx.expr(1).ast); }
+	;
+</div></code></pre>
+    <h3 id="versi%C3%B3n-avanzada">Versión Avanzada</h3>
+    <p>Al usar la opción de etiquetar los símbolos, se puede añadir un '+' antes del signo '='. De esta manera, ANTLR crea una lista del tipo adecuado (Token si es un terminal o su clase Context si es un no-terminal) y añade a la misma el token/contexto de dicho símbolo:</p>
+    <p>Ejemplo con terminales:</p>
+    <pre class="hljs"><code><div>a: l+=IDENT (',' l+=IDENT)*
+        { for (Token val : $l) { System.out.println(val); }};
+</div></code></pre>
+    <p>Ejemplo con no-terminales:</p>
+    <pre class="hljs"><code><div>a: l+=expr (',' l+=expr)*
+        { for (ExprContext ctx : $l) { System.out.println(ctx.ast); }};
+</div></code></pre>
+    <p>Usando esto, se podría hacer el ejemplo de la versión simple de la siguiente manera:</p>
+    <pre class="hljs"><code><div>start returns[Program ast]
+	: 'CODE' ls+=sentence* { $ast = new Program($ls); }
+	;
+
+sentence returns[Sentence ast]
+	: 'print' expr ';'	{ $ast = new Print($expr.ast); }
+	| expr '=' expr ';'	{ $ast = new Assignment($ctx.expr(0), $ctx.expr(1)); }
+	;
+</div></code></pre>
+    <p>Nótese que el no-terminal <code>sentences</code> ya no es necesario para introducir la repetición, ya que la lista de sentencias se puede hacer directamente en la regla padre <code>start</code>. La lista que ANTLR ha creado es de objetos <code>SentenceContext</code>, por lo que es posible que, antes de meterla en el AST, se prefiera recorrer dicha lista en la regla <code>start</code> y extraer el atributo <code>ast</code> de cada elemento para pasarselo al constructor del <code>Programa</code>. En el ejemplo anterior, se está suponiendo que esto lo hará el constructor de dicha clase.</p>
+    <p>Por tanto, las ventajas de este enfoque frente a la versión simple son:</p>
+    <ul>
+        <li>Permite sustituir los patrones BNF por los operadores EBNF de repetición ('+' y '*').</li>
+        <li>Se evita así tener que escribir el código Java para añadirlos a una lista.</li>
+        <li>Permite unas reglas más limpias al tener todo el código Java al final de las mismas (y no intercaladas entre los símbolos).</li>
+    </ul>
+
+</body>
+
+</html>

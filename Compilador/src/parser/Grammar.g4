@@ -5,12 +5,16 @@ import Lexicon
 	;
 
 start
-	: instruction* EOF
+	: definition* EOF
 	;
 
-instruction
+definition
 	: defVar
 	| defFunc
+	;
+
+defVars
+	: defVar*
 	;
 
 defVar
@@ -27,16 +31,12 @@ type
 	;
 
 defFunc
-	: IDENT '(' params? ')' (':' type)? '{' defVar* sentences '}'
+	: IDENT '(' params? ')' (':' type)? '{' defVars sentences '}'
 	;
 
 params
-	: param
-	| params ',' param
-	;
-
-param
 	: IDENT ':' type
+	| params ',' IDENT ':' type
 	;
 
 sentences
@@ -46,10 +46,13 @@ sentences
 sentence
 	: expr '=' expr ';'
 	| 'read' expr ';'
-	| ('print' | 'printsp' | 'println') expr ';'
+	| 'print' expr? ';'
+	| 'printsp' expr? ';'
+	| 'println' expr? ';'
 	| 'return' expr ';'
 	| 'if' '(' expr ')' '{' sentences '}' ('else' '{' sentences '}')?
 	| 'while' '(' expr ')' '{' sentences '}'
+	| IDENT '(' args? ')' ';'
 	;
 
 expr
@@ -58,16 +61,16 @@ expr
 	| REAL_CONSTANT
 	| CHAR_CONSTANT
 	| IDENT '(' args? ')'
+	| expr '[' expr ']'
+	| expr '.' IDENT
+	| 'cast' '<' type '>' '(' expr ')'
 	| '(' expr ')'
 	| expr ('*' | '/') expr
 	| expr ('+' | '-') expr
-	| expr '[' expr ']'
-	| expr '.' IDENT
 	| expr ('<' | '>' | '<=' | '>=' | '==' | '!=') expr
 	| '!' expr
 	| expr '&&' expr
 	| expr '||' expr
-	| 'cast' '<' type '>' '(' expr ')'
 	;
 
 args
