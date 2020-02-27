@@ -4,6 +4,10 @@ grammar Grammar
 import Lexicon
 	;
 
+@parser::header {
+    import ast.*;
+}
+
 start
 	: definition* EOF
 	;
@@ -47,20 +51,20 @@ param
 	: IDENT ':' type
 	;
 
-sentences
-	: sentence*
+sentences returns[List<Sentence> list = new ArrayList<Sentence>()]
+	: (sentence { $list.add($sentence.ast); })*
 	;
 
-sentence
-	: expr '=' expr ';'
-	| 'read' expr ';'
-	| 'print' expr? ';'
-	| 'printsp' expr? ';'
-	| 'println' expr? ';'
-	| 'return' expr ';'
-	| 'if' '(' expr ')' '{' sentences '}' ('else' '{' sentences '}')?
-	| 'while' '(' expr ')' '{' sentences '}'
-	| IDENT '(' args? ')' ';'
+sentence returns[Sentence ast]
+	: expr '=' expr ';'													{ $ast = new Assignment($ctx.expr(0),$ctx.expr(1)); }
+	| 'read' expr ';'													{ $ast = new Read($expr.ast); }
+	| 'print' expr? ';'													{ $ast = new Print($expr.ast); }
+	| 'printsp' expr? ';'												{ $ast = new Printsp($expr.ast); }
+	| 'println' expr? ';'												{ $ast = new Println($expr.ast); }
+	| 'return' expr ';'													{ $ast = new Return($expr.ast); }
+	| 'if' '(' expr ')' '{' sentences '}' ('else' '{' sentences '}')?	{ $ast = new IfElse($expr.ast, $ctx.sentences(0), $ctx.sentences(1)); }
+	| 'while' '(' expr ')' '{' sentences '}'							{ $ast = new While($expr.ast, $sentences.ast); }
+	| IDENT '(' args? ')' ';'											{ $ast = new FuncInvocation($IDENT, $args.ast); }
 	;
 
 expr
