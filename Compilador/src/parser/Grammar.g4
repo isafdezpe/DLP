@@ -10,6 +10,7 @@ start
 
 definition
 	: defVar
+	| 'struct' IDENT '{' defFields '}' ';'
 	| defFunc
 	;
 
@@ -19,7 +20,10 @@ defVars
 
 defVar
 	: 'var' IDENT ':' type ';'
-	| 'struct' IDENT '{' (IDENT ':' type ';')+ '}' ';'
+	;
+
+defFields
+	: (IDENT ':' type ';')+
 	;
 
 type
@@ -35,8 +39,12 @@ defFunc
 	;
 
 params
+	: param
+	| params ',' param
+	;
+
+param
 	: IDENT ':' type
-	| params ',' IDENT ':' type
 	;
 
 sentences
