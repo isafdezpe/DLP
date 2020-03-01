@@ -51,8 +51,8 @@ public class Main {
         AST ast = null;
 
         // IMPORTANTE: Cuando se genere el AST, INTERCAMBIAR las dos líneas siguientes:
-        parser.start();
-        // ast = parser.start().ast;
+        //parser.start();
+        ast = parser.start().ast;
 
         if (parser.getNumberOfSyntaxErrors() > 0 || ast == null) { // Hay errores o el AST no se ha implementado aún
             errorManager.notify("El AST no ha sido creado.");
