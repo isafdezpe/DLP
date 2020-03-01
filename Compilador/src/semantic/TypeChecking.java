@@ -5,8 +5,6 @@
 
 package semantic;
 
-import java.util.*;
-
 import ast.*;
 import main.*;
 import visitor.*;
@@ -17,11 +15,12 @@ public class TypeChecking extends DefaultVisitor {
         this.errorManager = errorManager;
     }
 
-    // ----------------------------------------------------------
+    // # ----------------------------------------------------------
     /*
-     * Poner aquí los visit necesarios. Si se ha usado VGen, solo hay que copiarlos
-     * de la clase 'visitor/_PlantillaParaVisitors.txt'.
-     */
+    * Poner aquí los visit.
+    *
+    * Si se ha usado VGen, solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
+    */
 
     // public Object visit(Program prog, Object param) {
     //      ...
@@ -31,13 +30,13 @@ public class TypeChecking extends DefaultVisitor {
     // ...
     // ...
 
-    // ----------------------------------------------------------
+    // # ----------------------------------------------------------
     // Métodos auxiliares recomendados (opcionales) -------------
 
     /**
      * predicado. Método auxiliar para implementar los predicados. Borrar si no se quiere usar.
      *
-     * Ejemplos de uso (suponiendo que existe un método "esPrimitivo"):
+     * Ejemplos de uso (suponiendo que existe un método "esPrimitivo(expr)"):
      *
      *      1. predicado(esPrimitivo(expr.tipo), "La expresión debe ser de un tipo primitivo", expr.getStart());
      *      2. predicado(esPrimitivo(expr.tipo), "La expresión debe ser de un tipo primitivo", expr); // Se asume getStart()

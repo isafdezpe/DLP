@@ -14,9 +14,10 @@ import visitor.*;
 public class MemoryAllocation extends DefaultVisitor {
 
     /*
-     * Poner aquí los visit necesarios. Si se ha usado VGen, solo hay que copiarlos
-     * de la clase 'visitor/_PlantillaParaVisitors.txt'.
-     */
+    * Poner aquí los visit.
+    *
+    * Si se ha usado VGen, solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
+    */
 
     // public Object visit(Program prog, Object param) {
     //      ...

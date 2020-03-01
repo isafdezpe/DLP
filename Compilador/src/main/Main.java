@@ -7,14 +7,14 @@ package main;
 
 import java.io.*;
 
+import org.antlr.v4.runtime.*;
+
 import ast.*;
 import visitor.*;
 
 import parser.*;
 import semantic.*;
 import codegeneration.*;
-
-import org.antlr.v4.runtime.*;
 
 /**
  * Clase que inicia el compilador e invoca a todas sus fases.
@@ -32,7 +32,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         ErrorManager errorManager = new ErrorManager();
 
-        AST ast = compile(program, errorManager); // Poner args[0] en vez de "programa" en la versión final
+        AST ast = compile(program, errorManager); // Poner args[0] en vez de "program" en la versión final
         if (errorManager.errorsCount() == 0)
             System.out.println("El programa se ha compilado correctamente.");
 
@@ -51,7 +51,7 @@ public class Main {
         AST ast = null;
 
         // IMPORTANTE: Cuando se genere el AST, INTERCAMBIAR las dos líneas siguientes:
-        //parser.start();
+        // parser.start();
         ast = parser.start().ast;
 
         if (parser.getNumberOfSyntaxErrors() > 0 || ast == null) { // Hay errores o el AST no se ha implementado aún

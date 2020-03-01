@@ -6,7 +6,6 @@
 package codegeneration;
 
 import java.io.*;
-import java.util.*;
 
 import ast.*;
 import visitor.*;
@@ -18,10 +17,11 @@ public class CodeSelection extends DefaultVisitor {
         this.sourceFile = sourceFile;
     }
 
-    // ----------------------------------------------------------
+    // # ----------------------------------------------------------
     /*
-     * Poner aquí los visit necesarios. Si se ha usado VGen, solo hay que copiarlos
-     * de la clase 'visitor/_PlantillaParaVisitors.txt'.
+     * Poner aquí los visit.
+     *
+     * Si se ha usado VGen, solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
      */
 
     // Ejemplo:
@@ -35,18 +35,22 @@ public class CodeSelection extends DefaultVisitor {
     //      return null;
     // }
 
-    // ----------------------------------------------------------
+    // # ----------------------------------------------------------
     // Métodos auxiliares recomendados (opcionales) -------------
+
+    // Imprime una línea en el fichero de salida
     private void out(String instruction) {
         writer.println(instruction);
     }
 
-    private void line(Position pos) {
-        out("\n#line " + pos.getLine());
-    }
-
+    // Imprime la directiva `#line` junto con la línea del fichero de entrada donde estaba el nodo
+    // indicado
     private void line(AST node) {
         line(node.getEnd());
+    }
+
+    private void line(Position pos) {
+        out("\n#line " + pos.getLine());
     }
 
     private PrintWriter writer;

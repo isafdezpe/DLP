@@ -17,9 +17,9 @@ definitions returns[List<Definition> list = new ArrayList<Definition>();]
 	;
 
 definition returns[Definition ast]
-	: defVar								{ $ast = $defVar.ast; }
-	| 'struct' IDENT '{' defFields '}' ';'	{ $ast = new StructDefinition($IDENT,$defFields.list); }
-	| defFunc								{ $ast = $defFunc.ast; }
+	: defVar														{ $ast = $defVar.ast; }
+	| 'struct' IDENT '{' defFields '}' ';'							{ $ast = new StructDefinition($IDENT,$defFields.list); }
+	| IDENT '(' params ')' (':' type)? '{' defVars sentences '}'	{ $ast = new FunDefinition($IDENT,$params.list,$type.ast,$defVars.list,$sentences.list); }
 	;
 
 defVars returns[List<Definition> list = new ArrayList<Definition>();]
@@ -42,10 +42,6 @@ type returns[Type ast]
 	| '[' INT_CONSTANT ']' type	{ $ast = new ArrayType($INT_CONSTANT,$type.ast); }
 	;
 
-defFunc returns[Definition ast]
-	: IDENT '(' params ')' (':' type)? '{' defVars sentences '}' { $ast = new FunDefinition($IDENT,$params.list,$type.ast,$defVars.list,$sentences.list); }
-	;
-
 params returns[List<Definition> list = new ArrayList<Definition>()]
 	: (param { $list.add($param.ast); } (',' param { $list.add($param.ast); })*)?
 	;
@@ -65,7 +61,7 @@ sentence returns[Sentence ast]
 	| 'printsp' expr? ';'												{ $ast = new Printsp($expr.ast); }
 	| 'println' expr? ';'												{ $ast = new Println($expr.ast); }
 	| 'return' expr ';'													{ $ast = new Return($expr.ast); }
-	| 'if' '(' expr ')' '{' sentences '}' ('else' '{' sentences '}')?	{ $ast = new IfElse($expr.ast, $ctx.sentences(0), $ctx.sentences(1)); }
+	| 'if' '(' expr ')' '{' sentences '}' ('else' '{' sentences '}')?	{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, $ctx.sentences(1).list); }
 	| 'while' '(' expr ')' '{' sentences '}'							{ $ast = new While($expr.ast, $sentences.list); }
 	| IDENT '(' args ')' ';'											{ $ast = new FuncInvocation($IDENT, $args.list); }
 	;
