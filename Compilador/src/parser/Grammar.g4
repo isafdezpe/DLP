@@ -17,9 +17,10 @@ definitions returns[List<Definition> list = new ArrayList<Definition>();]
 	;
 
 definition returns[Definition ast]
-	: defVar														{ $ast = $defVar.ast; }
-	| 'struct' IDENT '{' defFields '}' ';'							{ $ast = new StructDefinition($IDENT,$defFields.list); }
-	| IDENT '(' params ')' (':' type)? '{' defVars sentences '}'	{ $ast = new FunDefinition($IDENT,$params.list,$type.ast,$defVars.list,$sentences.list); }
+	: defVar													{ $ast = $defVar.ast; }
+	| 'struct' IDENT '{' defFields '}' ';'						{ $ast = new StructDefinition(new VarType($IDENT),$defFields.list); }
+	| IDENT '(' params ')' ':' type '{' defVars sentences '}'	{ $ast = new FunDefinition($IDENT,$params.list,$type.ast,$defVars.list,$sentences.list); }
+	| IDENT '(' params ')' '{' defVars sentences '}'			{ $ast = new FunDefinition($IDENT,$params.list,new VoidType(),$defVars.list,$sentences.list); }
 	;
 
 defVars returns[List<Definition> list = new ArrayList<Definition>();]
@@ -39,7 +40,7 @@ type returns[Type ast]
 	| 'float'					{ $ast = new RealType(); }
 	| 'char'					{ $ast = new CharType(); }
 	| IDENT						{ $ast = new VarType($IDENT); }
-	| '[' INT_CONSTANT ']' type	{ $ast = new ArrayType($INT_CONSTANT,$type.ast); }
+	| '[' INT_CONSTANT ']' type	{ $ast = new ArrayType(new IntConstant($INT_CONSTANT),$type.ast); }
 	;
 
 params returns[List<Definition> list = new ArrayList<Definition>()]
@@ -55,15 +56,16 @@ sentences returns[List<Sentence> list = new ArrayList<Sentence>()]
 	;
 
 sentence returns[Sentence ast]
-	: expr '=' expr ';'													{ $ast = new Assignment($ctx.expr(0),$ctx.expr(1)); }
-	| 'read' expr ';'													{ $ast = new Read($expr.ast); }
-	| 'print' expr? ';'													{ $ast = new Print($expr.ast); }
-	| 'printsp' expr? ';'												{ $ast = new Printsp($expr.ast); }
-	| 'println' expr? ';'												{ $ast = new Println($expr.ast); }
-	| 'return' expr ';'													{ $ast = new Return($expr.ast); }
-	| 'if' '(' expr ')' '{' sentences '}' ('else' '{' sentences '}')?	{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, $ctx.sentences(1).list); }
-	| 'while' '(' expr ')' '{' sentences '}'							{ $ast = new While($expr.ast, $sentences.list); }
-	| IDENT '(' args ')' ';'											{ $ast = new FuncInvocation($IDENT, $args.list); }
+	: expr '=' expr ';'												{ $ast = new Assignment($ctx.expr(0),$ctx.expr(1)); }
+	| 'read' expr ';'												{ $ast = new Read($expr.ast); }
+	| 'print' expr? ';'												{ $ast = new Print($expr.ast); }
+	| 'printsp' expr? ';'											{ $ast = new Printsp($expr.ast); }
+	| 'println' expr? ';'											{ $ast = new Println($expr.ast); }
+	| 'return' expr ';'												{ $ast = new Return($expr.ast); }
+	| 'if' '(' expr ')' '{' sentences '}'							{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, null); }
+	| 'if' '(' expr ')' '{' sentences '}' 'else' '{' sentences '}'	{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, $ctx.sentences(1).list); }
+	| 'while' '(' expr ')' '{' sentences '}'						{ $ast = new While($expr.ast, $sentences.list); }
+	| IDENT '(' args ')' ';'										{ $ast = new FuncInvocation($IDENT, $args.list); }
 	;
 
 expr returns[Expression ast]
@@ -72,8 +74,8 @@ expr returns[Expression ast]
 	| REAL_CONSTANT											{ $ast = new RealConstant($REAL_CONSTANT); }
 	| CHAR_CONSTANT											{ $ast = new CharConstant($CHAR_CONSTANT); }
 	| IDENT '(' args ')'									{ $ast = new FuncInvocationExpression($IDENT,$args.list); }
-	| expr '[' expr ']'										{ $ast = new IndexExpression($ctx.expr(0),$ctx.expr(1)); }
 	| expr '.' IDENT										{ $ast = new FieldAccessExpression($expr.ast,$IDENT); }
+	| expr '[' expr ']'										{ $ast = new IndexExpression($ctx.expr(0),$ctx.expr(1)); }
 	| 'cast' '<' type '>' '(' expr ')'						{ $ast = new CastExpression($type.ast,$expr.ast); }
 	| '(' expr ')'											{ $ast = $expr.ast; }
 	| expr op=('*' | '/') expr								{ $ast = new ArithmeticExpression($ctx.expr(0),$op,$ctx.expr(1)); }
