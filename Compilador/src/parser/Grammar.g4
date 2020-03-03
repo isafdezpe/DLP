@@ -58,9 +58,11 @@ sentences returns[List<Sentence> list = new ArrayList<Sentence>()]
 sentence returns[Sentence ast]
 	: expr '=' expr ';'												{ $ast = new Assignment($ctx.expr(0),$ctx.expr(1)); }
 	| 'read' expr ';'												{ $ast = new Read($expr.ast); }
-	| 'print' expr? ';'												{ $ast = new Print($expr.ast); }
-	| 'printsp' expr? ';'											{ $ast = new Printsp($expr.ast); }
-	| 'println' expr? ';'											{ $ast = new Println($expr.ast); }
+	| 'print' expr ';'												{ $ast = new Print($expr.ast); }
+	| 'printsp' expr ';'											{ $ast = new Printsp($expr.ast); }
+	| 'println' expr ';'											{ $ast = new Println($expr.ast); }
+	| 'println' ';'													{ $ast = new Println(null); }
+	| 'return' ';'													{ $ast = new Return(null); }
 	| 'return' expr ';'												{ $ast = new Return($expr.ast); }
 	| 'if' '(' expr ')' '{' sentences '}'							{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, null); }
 	| 'if' '(' expr ')' '{' sentences '}' 'else' '{' sentences '}'	{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, $ctx.sentences(1).list); }
