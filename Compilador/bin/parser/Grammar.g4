@@ -60,9 +60,10 @@ sentence returns[Sentence ast]
 	| 'read' expr ';'												{ $ast = new Read($expr.ast); }
 	| 'print' expr ';'												{ $ast = new Print($expr.ast); }
 	| 'printsp' expr ';'											{ $ast = new Printsp($expr.ast); }
+	| 'printsp' ';'													{ $ast = new Printsp(null); }
 	| 'println' expr ';'											{ $ast = new Println($expr.ast); }
 	| 'println' ';'													{ $ast = new Println(null); }
-	| 'return' ';'													{ $ast = new Return(null); }
+	| 'return' ';'													{ $ast = new Return(new VoidConstant()); }
 	| 'return' expr ';'												{ $ast = new Return($expr.ast); }
 	| 'if' '(' expr ')' '{' sentences '}'							{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, null); }
 	| 'if' '(' expr ')' '{' sentences '}' 'else' '{' sentences '}'	{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, $ctx.sentences(1).list); }
@@ -76,7 +77,7 @@ expr returns[Expression ast]
 	| REAL_CONSTANT											{ $ast = new RealConstant($REAL_CONSTANT); }
 	| CHAR_CONSTANT											{ $ast = new CharConstant($CHAR_CONSTANT); }
 	| IDENT '(' args ')'									{ $ast = new FuncInvocationExpression($IDENT,$args.list); }
-	| expr '.' IDENT										{ $ast = new FieldAccessExpression($expr.ast,$IDENT); }
+	| expr '.' IDENT										{ $ast = new FieldAccessExpression($ctx.expr(0),$IDENT); }
 	| expr '[' expr ']'										{ $ast = new IndexExpression($ctx.expr(0),$ctx.expr(1)); }
 	| 'cast' '<' type '>' '(' expr ')'						{ $ast = new CastExpression($type.ast,$expr.ast); }
 	| '(' expr ')'											{ $ast = $expr.ast; }

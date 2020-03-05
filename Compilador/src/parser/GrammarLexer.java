@@ -1,4 +1,4 @@
-// Generated from src\parser\Grammar.g4 by ANTLR 4.7.2
+// Generated from src/parser/Grammar.g4 by ANTLR 4.7.2
 package parser;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
