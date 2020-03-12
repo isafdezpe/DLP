@@ -5,6 +5,9 @@
 
 package semantic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ast.*;
 import main.*;
 import visitor.*;
@@ -26,9 +29,42 @@ public class Identification extends DefaultVisitor {
     //      ...
     // }
 
-    // ...
-    // ...
-    // ...
+    public Object visit(FunDefinition node, Object param) {
+        predicado(funciones.get(node.getName()) == null, "Error: función ya definida " + node.getName(), node);
+        funciones.put(node.getName(), node);
+
+        variables.set();
+
+        super.visit(node, param);
+
+        variables.reset();
+
+        return null;
+    }
+
+    public Object visit(FuncInvocation node, Object param) {
+        super.visit(node, param);
+
+        FunDefinition definition = funciones.get(node.getName());
+
+        predicado(definition != null, "Error: procedimiento no definido " + node.getName(), node);
+
+        node.setDefinition(definition);
+
+        return null;
+    }
+
+    public Object visit(FuncInvocationExpression node, Object param) {
+        super.visit(node, param);
+
+        FunDefinition definition = funciones.get(node.getName());
+
+        predicado(definition != null, "Error: función no definida " + node.getName(), node);
+
+        node.setDefinition(definition);
+
+        return null;
+    }
 
     // # ----------------------------------------------------------
     // Métodos auxiliares recomendados (opcionales) -------------
@@ -68,4 +104,6 @@ public class Identification extends DefaultVisitor {
     }
 
     private ErrorManager errorManager;
+    private Map<String, FunDefinition> funciones = new HashMap<String, FunDefinition>();
+    private ContextMap<String, VarDefinition> variables = new ContextMap();
 }

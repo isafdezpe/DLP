@@ -6,6 +6,7 @@ import Lexicon
 
 @parser::header {
     import ast.*;
+	import ast.VarDefinition.VarScope;
 }
 
 start returns[Program ast]
@@ -24,11 +25,11 @@ definition returns[Definition ast]
 	;
 
 defVars returns[List<Definition> list = new ArrayList<Definition>();]
-	: (defVar { $list.add($defVar.ast); })*
+	: ('var' IDENT ':' type ';' { $list.add(new VarDefinition($IDENT,$type.ast,VarScope.LOCAL)); })*
 	;
 
 defVar returns[Definition ast]
-	: 'var' IDENT ':' type ';' { $ast = new VarDefinition($IDENT,$type.ast); }
+	: 'var' IDENT ':' type ';' { $ast = new VarDefinition($IDENT,$type.ast,VarScope.GLOBAL); }
 	;
 
 defFields returns[List<StructField> list = new ArrayList<StructField>();]
@@ -43,12 +44,12 @@ type returns[Type ast]
 	| '[' INT_CONSTANT ']' type	{ $ast = new ArrayType(new IntConstant($INT_CONSTANT),$type.ast); }
 	;
 
-params returns[List<Definition> list = new ArrayList<Definition>()]
+params returns[List<VarDefinition> list = new ArrayList<VarDefinition>()]
 	: (param { $list.add($param.ast); } (',' param { $list.add($param.ast); })*)?
 	;
 
-param returns[Definition ast]
-	: IDENT ':' type { $ast = new VarDefinition($IDENT,$type.ast); }
+param returns[VarDefinition ast]
+	: IDENT ':' type { $ast = new VarDefinition($IDENT,$type.ast,VarScope.LOCAL); }
 	;
 
 sentences returns[List<Sentence> list = new ArrayList<Sentence>()]
@@ -90,5 +91,5 @@ expr returns[Expression ast]
 	;
 
 args returns[List<Expression> list = new ArrayList<Expression>()]
-	: (expr { $list.add($expr.ast); } (',' expr { $list.add($expr.ast); })*)
+	: (expr { $list.add($expr.ast); } (',' expr { $list.add($expr.ast); })*)?
 	;

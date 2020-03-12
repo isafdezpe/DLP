@@ -1,5 +1,5 @@
 /**
- * @generated VGen (for ANTLR) 1.7.0
+ * @generated VGen (for ANTLR) 1.7.1
  */
 
 package ast;
@@ -52,12 +52,13 @@ public abstract class AbstractAST implements AST {
     // - Si recibe un AST, no hace nada y devuelve el mismo objeto.
     // - Si recibe un ParserRuleContext, extrae el `AST` de su atributo `ast`.
     protected AST getAST(Object node) {
+        if (node == null)
+            return null; // No es error que no haya hijo
         if (node instanceof ParserRuleContext)
             return getAST((ParserRuleContext) node);
         if (node instanceof AST)
             return (AST) node;
         throw new IllegalArgumentException("El objecto pasado tiene que ser un `AST` o un `ParserRuleContext`");
-
     }
 
     // Recibe una List<AST> o List<ParserRuleContext> y devuelve una List<AST>.

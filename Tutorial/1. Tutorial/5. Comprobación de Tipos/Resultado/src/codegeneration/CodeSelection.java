@@ -39,18 +39,19 @@ public class CodeSelection extends DefaultVisitor {
     // Métodos auxiliares recomendados (opcionales) -------------
 
     // Imprime una línea en el fichero de salida
-    private void out(String instruction) {
+     private void out(String instruction) {
         writer.println(instruction);
     }
 
-    // Imprime la directiva `#line` junto con la línea del fichero de entrada donde estaba el nodo
-    // indicado
     private void line(AST node) {
         line(node.getEnd());
     }
 
     private void line(Position pos) {
-        out("\n#line " + pos.getLine());
+        if (pos != null)
+            out("\n#line " + pos.getLine());
+        else
+            System.out.println("#line no generado. Se ha pasado una Position null. Falta información en el AST");
     }
 
     private PrintWriter writer;

@@ -1,5 +1,5 @@
 /**
- * @generated VGen (for ANTLR) 1.6.0
+ * @generated VGen (for ANTLR) 1.7.1
  */
 
 package ast;
@@ -32,5 +32,4 @@ public class IntType extends AbstractType {
     public char getSuffix() {
         return 'i';
     }
-
 }

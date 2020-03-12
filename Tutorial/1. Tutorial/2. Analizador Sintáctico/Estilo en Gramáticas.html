@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)file:///C:/Users/rauli/Desktop/zzz/Estilo%20en%20Gram%C3%A1ticas.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Estilo en Gramáticas.md</title>
+
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>Documento realizado para la asignatura de <em>Diseño de Lenguajes de Programación</em> de la <em>Escuela de Ingeniería Informática</em> de  la <em>Universidad de Oviedo</em>.</p>
+<p>Raúl Izquierdo Castanedo (raul@uniovi.es)</p>
+<h1 id="criterios-de-estilo-al-hacer-gram%C3%A1ticas-v10">Criterios de Estilo al hacer Gramáticas (v1.0)</h1>
+<p>A la hora de establecer un estilo para crear las reglas de una gramática (sea BNF o EBNF), <em>sólo</em> hay un objetivo <em>fundamental</em>:</p>
+<blockquote>
+<p>Que la gramática sea <strong>lo más sencilla posible de entender</strong></p>
+</blockquote>
+<p>Formas de conseguirlo:</p>
+<ul>
+<li><strong>Minimizar el número de reglas</strong>. En principio, será más fácil enfrentarse a una gramática cuanto más pequeña sea.</li>
+<li><strong>Estructura simple de cada Regla</strong>. Que, sólo viendo la forma de la regla, ya se vea qué pretende expresar y se tenga la mitad del trabajo de comprensión hecho.</li>
+<li><strong>Limpieza de cada Regla</strong>. Cuantas más acciones Java haya en una regla, más difícil será de entender su estructura.</li>
+</ul>
+<p>Estas son las normas generales pero, por supuesto, hay que saber cuándo romperlas. A veces, para conseguir reglas más limpias, hay que añadir alguna regla intermedia (lo que va en contra de la primera regla). Por ejemplo, a la hora de definir listas se recomienda utilizar una regla auxiliar.</p>
+<p>En definitiva, las reglas anteriores deben contemplarse... hasta que el no seguirlas haga <em>más sencilla de entender</em> la gramática (que es el verdadero objetivo). Sin embargo, se recomienda tener al menos estos criterios, lo cual será mejor que no tener ninguno.</p>
+<h2 id="minimizar-el-n%C3%BAmero-de-reglas">Minimizar el Número de Reglas</h2>
+<p>Parece evidente que cuantas menos reglas tenga una gramática, más facil será de entender. Sin embargo, muchas veces se añaden reglas artificiales sin necesidad.</p>
+<p>Un enemigo habitual a la hora de obtener gramáticas más pequeñas es el intentar clasificar las reglas <em>innecesariamente</em> (clasificar por clasificar). Un caso habitual de esto, aunque hay muchos, sería el de las <em>expresiones</em>. Es común verlas definidas así:</p>
+<pre class="hljs"><code><div>expr: constante
+    | cast
+    | aritméticas
+    | lógicas
+    | ...
+
+coonstantes: INT_CONTANT | REAL_CONSTANT;
+    ;
+
+cast: '('type')' expr
+    ;
+
+aritméticas: expr '+' exp
+    ;
+
+logicas: expr '&amp;&amp;' expr
+    ;
+
+...
+</div></code></pre>
+<p>Es cierto que los operadores anteriores, en el mundo real, se clasifican en las categorías indicadas. Pero aquí el trabajo no es crear ningún tipo de representanción o modelo del mundo real; el objetivo es saber lo más <em>rápidamente</em> posible si se nos ha olvidado un operador <strong>navegando lo mínimo posible por la gramática</strong>. En ese caso, una solución como la siguiente sería más fácil de comprender y validar:</p>
+<pre class="hljs"><code><div>expr: INT_CONSTANT
+    | REAL_CONSTANT
+    | '('type')' expr
+    | expr '+' expr
+    | expr '&amp;&amp;' expr
+    | ...
+</div></code></pre>
+<p>Es decir, que en vez de tener reglas del estilo:</p>
+<pre class="hljs"><code><div>a:  b0
+    | c0
+    | d0
+    ;
+
+b0: b1 b2;
+
+c0: c1 c2;
+
+d0: d1 d2;
+</div></code></pre>
+<p>Se recomienda, en general, que cuando una regla tenga alternativas, estas se desglosen <em>in-situ</em> en la misma regla padre en vez de crear una regla para cada alternativa:</p>
+<pre class="hljs"><code><div>a:    b1 b2
+    | c1 c2
+    | d1 d2
+</div></code></pre>
+<p>Dicho de otra manera, como criterio general, si se encuentra un no-terminal que <em><strong>se nombra desde sólo una regla</strong></em>, habría que plantearse su necesidad y si, en vez de eso, se debería expandir su definición en dicha regla padre.</p>
+<p>Sin embargo, hay situaciones en las que sí es necesario crear una regla independiente:</p>
+<ul>
+<li>Si se usa en algún sitio más de la gramática (y si en ambos sitios se espera recibir el mismo nodo del AST y creado con los mismos argumentos).</li>
+<li>Si la regla representa una repetición de elementos (Ver "Acciones en ANTLR4. Listas").</li>
+<li>Que el incorporar la regla en el padre dificulte entender dicha regla padre o el resto de las alternativas hermanas.</li>
+</ul>
+<h2 id="reglas-con-estructuras-simples">Reglas con Estructuras Simples</h2>
+<p>Al enfrentarse a una gramática, el esfuerzo para entenderla será mayor cuanto más crípticas sean sus reglas. La solución es fácil: <em>que no haya reglas crípticas</em>. Para ello, toda regla deberá tener una de estas tres formas simples y conocidas:</p>
+<ul>
+<li>O es una <strong>secuencia</strong>, que indica el orden en el que deben aparecer unos símbolos (es la forma trivial de una regla).</li>
+<li>O es una <strong>composición</strong>, en la que se definen los elementos atómicos y luego se definen elementos mayores a partir de estos. Los casos más comunes son las definiciones de las <em>expresiones</em> y de los <em>tipos</em>.</li>
+<li>O es una <strong>lista/repetición</strong>, que indica que <em>otro símbolo</em> (que estará definido de una de las dos formas anteriores) puede aparecer varias veces. Este tipo de reglas, a su vez, sólo pueden ser de cuatro tipos en función de si se tienen que repetir al menos una vez o no y de si usan o no separadores entre los elementos.</li>
+</ul>
+<p>No deberá haber <em>ninguna</em> regla que no sea <strong>una y sólo una</strong> de estas tres construcciones. De esta manera, será fácil entender cada regla y por tanto la gramática (lo mismo que cuando una parte de un diseño orientado a objetos es más fácil de entender en cuanto se identifica que sigue un patrón de diseño concreto).</p>
+<p>Si en la gramática sólo hay estas tres estructuras, las <em>listas</em> serán fáciles de <em>reconocer e ignorar</em> en una primera lectura, permitiendo <strong>centrarse en las secuencias y composiciones</strong> (que serán las que describan los elementos <em>importantes</em> del lenguaje).</p>
+<p>Sin embargo, el error más común no es que una regla no tenga una de estas tres formas; el error más común es que tenga <strong>más de una</strong>. Lo siguiente es un ejemplo de regla que mezcla más de una construcción. Al principio comienza como una <em>secuencia</em> que describe la definición de una función pero, en mitad de la regla, aparece una <em>repetición</em> (la de los parámetros).</p>
+<pre class="hljs"><code><div>func
+    : IDENT '(' (IDENT ':' tipo (',' IDENT ':' tipo)*)? ')' '{' sentences '}'
+    ;
+</div></code></pre>
+<p>Los inconvenientes son:</p>
+<ul>
+<li>Dicha regla es más difícil de entender al no poder clasificarse mentalmente de inmediato. Obliga a intentar entenderla sin ninguna ayuda más que nuestra capacidad de análisis.</li>
+<li>Cuando se añadan las acciones en Java que creen el AST, la regla quedará realmente oscurecida entre las acciones.</li>
+</ul>
+<p>Lo siguiente sería otro ejemplo de mezcla de dos construcciones. En <code>params</code>, que es una construcción <em>repetición</em>, se está definiendo a la vez la forma que debe tener un parámetro (que es una <em>secuencia</em>).</p>
+<pre class="hljs"><code><div>func
+    : IDENT '(' params ')' '{' sentences '}'
+    ;
+
+params
+    : (IDENT ':' tipo (',' IDENT ':' tipo)*)?
+    ;
+</div></code></pre>
+<p>Esto tiene el inconveniente de que la forma que tiene un parámetro (su nombre y su tipo separado por punto y coma) aparece dos veces en la regla. Esto supone que:</p>
+<ul>
+<li>Entender la forma que tienen los parámetros es más difícil, ya que habrá que comprobar mentalmente que no haya diferencias entre los dos sitios que oculten una entrada excepcional a considerar.</li>
+<li>Si posteriormente se decide cambiar la sintáxis de los parámetros (por ejemplo que el tipo se ponga antes del nombre) hay que acordarse de modificarlo en los dos sitios de la regla.</li>
+<li>A la hora de construir el AST, habrá que crear el mismo nodo en dos sitios. Y dichas acciones harán una regla muy difícil de leer, ya que estarán dentro de la regla.</li>
+</ul>
+<p>Todos los problemas de los dos ejemplos anteriores se solucionarían si cada regla siguiera <strong>una</strong> sola construcción:</p>
+<pre class="hljs"><code><div>func
+    : IDENT '(' params ')' '{' sentences '}'
+    ;
+
+params
+    : (param (',' param)*)?
+    ;
+
+param
+    : IDENT ':' tipo
+    ;
+</div></code></pre>
+<p>Ventajas:</p>
+<ul>
+<li>Se ve que <code>func</code> es una construción <em>secuencia</em> inmediata de entender.</li>
+<li>Se ve fácilmente que <code>params</code> es la habitual estructura de <em>lista</em>, lo que nos permite <strong>saltarla rápidamente</strong>, ya que son <strong>todas iguales</strong>.</li>
+<li>Se ve que <code>param</code> es una construción <em>secuencia</em> limpia y, por tanto, ahora se ve más fácilmente, y en un <em>único sitio</em>, cómo es un parámetro en este lenguaje.</li>
+</ul>
+<p>Para acabar, cabe aclarar que las repeticiones <em>sin separadores</em> no tienen los inconvenientes vistos anteriormente para los casos <em>con separadores</em>. Por ejemplo, supóngase que se quiere indicar que una función puede tener cero o más sentencias. Por homogeneidad con lo anterior, sería totalmente adecuado hacerlo así:</p>
+<pre class="hljs"><code><div>func
+    : IDENT '(' params ')' '{' sentences '}'
+    ;
+
+sentences: sentence*
+
+sentence: ...
+</div></code></pre>
+<p>Sin embargo, se podría relajar la norma eliminando el no-terminal <code>sentences</code> (ya que no tiene mucha funcionalidad) y llevar el operador <code>*</code> a la regla <code>func</code>. Quedaría entonces así:</p>
+<pre class="hljs"><code><div>func
+    : IDENT '(' params ')' '{' sentence* '}'
+    ;
+
+sentence: ...
+</div></code></pre>
+<p>De todas formas, se recomienda mirar el documento "Acciones en ANTLR4. Listas" para ver cómo habría que añadir las acciones Java a una gramática con repeticiones en el padre. Es posible que, debido a ello, se prefiera volver a la versión anterior con  la regla <code>sentences</code> usada aparte para la repetición.</p>
+<h2 id="limpieza-en-las-reglas">Limpieza en las Reglas</h2>
+<p>A la hora de entender una gramática, las acciones en Java es algo secundario que, en un primer momento, se debe ignorar para centranse en los símbolos terminales y no-terminales que constituyen cada regla. Por tanto, la tarea de comprender una gramática será <em>más difícil</em>:</p>
+<ul>
+<li>Cuantas más acciones Java haya en cada regla.</li>
+<li>Si las acciones, además, están situadas <em>entre</em> los símbolos de las reglas y no al final. Cada acción supone un obstáculo ya que hay que estar constantemente buscando los límites de las llaves para intentar extraerla mentalmente de las regla. Esto dificulta mucho su comprensión.</li>
+</ul>
+<p>Como ejemplo, obsérvese el siguiente ejemplo. ¿Qué está expresando en EBNF la regla <code>n</code>?</p>
+<pre class="hljs"><code><div>n returns [NNode ast]
+  locals[List&lt;ENode&gt; list = new ArrayList&lt;ENode&gt;()]
+    : a (e { $list.add($e.ast); } (',' e { $list.add($e.ast); })*)? b { $ast = new NNode($a.ast, $list, $b.ast); };
+
+e returns [ENode ast]: ...
+</div></code></pre>
+<p>En realidad, en una primera lectura de la gramática, la único que se querría ver de la regla es realmente  esto:</p>
+<pre class="hljs"><code><div>n
+    : a (e (',' e)*)? b
+</div></code></pre>
+<p>Por tanto, el objetivo ideal sería tener reglas con <em><strong>una sóla acción</strong></em> y que esté <em><strong>al final</strong></em> de la regla. Cuanto más se acerque una gramática a este objetivo, más <em>limpia</em> será la gramática.</p>
+<h2 id="resumen">Resumen</h2>
+<p>Una forma de obtener una gramática fácil de entender es, generalmente, hacer lo siguiente:</p>
+<ul>
+<li>Pocas reglas. Pensar, para cada regla, si realmente es necesaria o se puede <em>incrustar</em> en la regla que la llama.</li>
+<li>Que la forma de cada regla sea la de <em><strong>una y sólo una</strong></em> de las tres <em>construcciones básicas</em>.</li>
+<li>Intentar que las reglas tengan <em>una</em> sola acción Java y que esté <em>al final</em>.</li>
+</ul>
+
+
+
+</body></html>

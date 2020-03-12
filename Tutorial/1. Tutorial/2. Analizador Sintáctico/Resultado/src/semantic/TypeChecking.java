@@ -54,13 +54,13 @@ public class TypeChecking extends DefaultVisitor {
      * @param posicionError Fila y columna del fichero donde se ha producido el error.
      */
 
+    private void predicado(boolean condition, String errorMessage, AST node) {
+        predicado(condition, errorMessage, node.getStart());
+    }
+
     private void predicado(boolean condition, String errorMessage, Position position) {
         if (!condition)
             errorManager.notify("Type Checking", errorMessage, position);
-    }
-
-    private void predicado(boolean condition, String errorMessage, AST node) {
-        predicado(condition, errorMessage, node.getStart());
     }
 
     private void predicado(boolean condition, String errorMessage) {

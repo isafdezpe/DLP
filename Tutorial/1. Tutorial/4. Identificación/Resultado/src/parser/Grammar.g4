@@ -11,7 +11,7 @@ import Lexicon
 // --------------------------------------------------------------------
 // Solución 1. Versión básica original.
 // - No guarda posiciones de línea.
-// - Usa '$IDENT.text' y '$ctx.expr(0).ast'
+// - Usa '$IDENT.text' y '$l.ast'
 /*
 start returns[Program ast]
 	: 'DATA' variables 'CODE' sentences EOF { $ast = new Program($variables.list, $sentences.list); }
@@ -35,24 +35,23 @@ variable returns[VarDefinition ast]
 	;
 
 sentence returns[Sentence ast]
-	: 'print' expr ';'	{ $ast = new Print($expr.ast); }
-	| expr '=' expr ';'	{ $ast = new Assignment($ctx.expr(0).ast, $ctx.expr(1).ast); }
+	: 'print' expr ';'		{ $ast = new Print($expr.ast); }
+	| l=expr '=' r=expr ';'	{ $ast = new Assignment($l.ast, $r.ast); }
 	;
 
 expr returns[Expression ast]
-	: expr op=('*' | '/') expr	{ $ast = new ArithmeticExpression($ctx.expr(0).ast, $op.text, $ctx.expr(1).ast); }
-	| expr op=('+' | '-') expr	{ $ast = new ArithmeticExpression($ctx.expr(0).ast, $op.text, $ctx.expr(1).ast); }
-	| '(' expr ')'				{ $ast = $expr.ast; }
-	| IDENT						{ $ast = new Variable($IDENT.text); }
-	| INT_CONSTANT				{ $ast = new IntConstant($INT_CONSTANT.text); }
-	| REAL_CONSTANT				{ $ast = new RealConstant($REAL_CONSTANT.text); }
+	: l=expr op=('*' | '/') r=expr	{ $ast = new ArithmeticExpression($l.ast, $op.text, $r.ast); }
+	| l=expr op=('+' | '-') r=expr	{ $ast = new ArithmeticExpression($l.ast, $op.text, $r.ast); }
+	| '(' expr ')'					{ $ast = $expr.ast; }
+	| IDENT							{ $ast = new Variable($IDENT.text); }
+	| INT_CONSTANT					{ $ast = new IntConstant($INT_CONSTANT.text); }
+	| REAL_CONSTANT					{ $ast = new RealConstant($REAL_CONSTANT.text); }
 	;
 */
 // --------------------------------------------------------------------
-// Solución 2. Versión avanzada 1 (Requiere VGen).
-// - Ventaja 1. Añade información de fila/columna a los nodos. Ello se consigue pasando a los nodos $TOKEN en vez de $TOKEN.text (ver 'variable' y 'expr).
-// - Ventaja 2. Simplifica las reglas. Cuando se accede por índice (por ejemplo '$ctx.expr(0).ast'), no es necesario poner '.ast' (ver 'sentence' y 'expr').
-
+// Solución 2. Añade información de fila/columna en cada nodo (Requiere VGen).
+// Ello se consigue pasando a los nodos $TOKEN en vez de $TOKEN.text (ver 'variable' y 'expr).
+/*
 start returns[Program ast]
 	: 'DATA' variables 'CODE' sentences EOF { $ast = new Program($variables.list, $sentences.list); }
 	;
@@ -75,23 +74,24 @@ variable returns[VarDefinition ast]
 	;
 
 sentence returns[Sentence ast]
-	: 'print' expr ';'	{ $ast = new Print($expr.ast); }
-	| expr '=' expr ';'	{ $ast = new Assignment($ctx.expr(0), $ctx.expr(1)); }
+	: 'print' expr ';'		{ $ast = new Print($expr.ast); }
+	| l=expr '=' r=expr ';'	{ $ast = new Assignment($l.ast, $r.ast); }
 	;
 
 expr returns[Expression ast]
-	: expr op=('*' | '/') expr	{ $ast = new ArithmeticExpression($ctx.expr(0), $op, $ctx.expr(1)); }
-	| expr op=('+' | '-') expr	{ $ast = new ArithmeticExpression($ctx.expr(0), $op, $ctx.expr(1)); }
-	| '(' expr ')'				{ $ast = $expr.ast; }
-	| IDENT						{ $ast = new Variable($IDENT); }
-	| INT_CONSTANT				{ $ast = new IntConstant($INT_CONSTANT); }
-	| REAL_CONSTANT				{ $ast = new RealConstant($REAL_CONSTANT); }
+	: l=expr op=('*' | '/') r=expr	{ $ast = new ArithmeticExpression($l.ast, $op, $r.ast); }
+	| l=expr op=('+' | '-') r=expr	{ $ast = new ArithmeticExpression($l.ast, $op, $r.ast); }
+	| '(' expr ')'					{ $ast = $expr.ast; }
+	| IDENT							{ $ast = new Variable($IDENT); }
+	| INT_CONSTANT					{ $ast = new IntConstant($INT_CONSTANT); }
+	| REAL_CONSTANT					{ $ast = new RealConstant($REAL_CONSTANT); }
 	;
-
+*/
 // --------------------------------------------------------------------
-// Solución 3. Versión avanzada 2 (Requiere VGen).
-// - Ventaja. Permite eliminar los no-terminales creados únicamente para listas. En este caso, elimina las reglas 'variables' y 'sentences' al usar en la regla 'start' el operador '+='
-/*
+// Solución 3. Elimina reglas usando `+=` (Requiere VGen).
+// Permite eliminar los no-terminales creados únicamente para listas.
+// En este caso, elimina las reglas 'variables' y 'sentences' al usar en la regla 'start' el operador '+='
+
 start returns[Program ast]
 	: 'DATA' lv+=variable* 'CODE' ls+=sentence* EOF { $ast = new Program($lv, $ls); }
 	;
@@ -106,16 +106,15 @@ variable returns[VarDefinition ast]
 	;
 
 sentence returns[Sentence ast]
-	: 'print' expr ';'	{ $ast = new Print($expr.ast); }
-	| expr '=' expr ';'	{ $ast = new Assignment($ctx.expr(0), $ctx.expr(1)); }
+	: 'print' expr ';'		{ $ast = new Print($expr.ast); }
+	| l=expr '=' r=expr ';'	{ $ast = new Assignment($l.ast, $r.ast); }
 	;
 
 expr returns[Expression ast]
-	: expr op=('*' | '/') expr	{ $ast = new ArithmeticExpression($ctx.expr(0), $op, $ctx.expr(1)); }
-	| expr op=('+' | '-') expr	{ $ast = new ArithmeticExpression($ctx.expr(0), $op, $ctx.expr(1)); }
-	| '(' expr ')'				{ $ast = $expr.ast; }
-	| IDENT						{ $ast = new Variable($IDENT); }
-	| INT_CONSTANT				{ $ast = new IntConstant($INT_CONSTANT); }
-	| REAL_CONSTANT				{ $ast = new RealConstant($REAL_CONSTANT); }
+	: l=expr op=('*' | '/') r=expr	{ $ast = new ArithmeticExpression($l.ast, $op, $r.ast); }
+	| l=expr op=('+' | '-') r=expr	{ $ast = new ArithmeticExpression($l.ast, $op, $r.ast); }
+	| '(' expr ')'					{ $ast = $expr.ast; }
+	| IDENT							{ $ast = new Variable($IDENT); }
+	| INT_CONSTANT					{ $ast = new IntConstant($INT_CONSTANT); }
+	| REAL_CONSTANT					{ $ast = new RealConstant($REAL_CONSTANT); }
 	;
-*/

@@ -12,47 +12,64 @@ import visitor.*;
 
 public class VarDefinition extends AbstractDefinition {
 
-	public VarDefinition(String name, Type type) {
-		this.name = name;
-		this.type = type;
+    public enum VarScope {
+        GLOBAL, LOCAL
+    };
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(type);
-	}
+    public VarDefinition(String name, Type type, VarScope scope) {
+        this.name = name;
+        this.type = type;
+        this.scope = scope;
 
-	public VarDefinition(Object name, Object type) {
-		this.name = (name instanceof Token) ? ((Token)name).getText() : (String) name;
-		this.type = (Type) getAST(type);
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(type);
+    }
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(name, type);
-	}
+    public VarDefinition(Object name, Object type, VarScope scope) {
+        this.name = (name instanceof Token) ? ((Token) name).getText() : (String) name;
+        this.type = (Type) getAST(type);
+        this.scope = scope;
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(name, type);
+    }
 
-	public Type getType() {
-		return type;
-	}
-	public void setType(Type type) {
-		this.type = type;
-	}
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	private String name;
-	private Type type;
+    public Type getType() {
+        return type;
+    }
 
-	public String toString() {
-       return "{name:" + getName() + ", type:" + getType() + "}";
-   }
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public VarScope getScope() {
+        return scope;
+    }
+
+    public void setScope(VarScope scope) {
+        this.scope = scope;
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private String name;
+    private Type type;
+    private VarScope scope;
+
+    public String toString() {
+        return "{name:" + getName() + ", type:" + getType() + ", scope:" + getScope() + "}";
+    }
 }

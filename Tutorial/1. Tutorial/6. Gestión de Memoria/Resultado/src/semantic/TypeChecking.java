@@ -15,6 +15,7 @@ public class TypeChecking extends DefaultVisitor {
         this.errorManager = errorManager;
     }
 
+    // # ----------------------------------------------------------
     //	class Assignment { Expression left;  Expression right; }
     public Object visit(Assignment node, Object param) {
 
@@ -65,10 +66,13 @@ public class TypeChecking extends DefaultVisitor {
         return (a.getType().getClass() == b.getType().getClass());
     }
 
+    // # ----------------------------------------------------------
+    // Métodos auxiliares recomendados (opcionales) -------------
+
     /**
      * predicado. Método auxiliar para implementar los predicados. Borrar si no se quiere usar.
      *
-     * Ejemplos de uso (suponiendo que existe un método "esPrimitivo"):
+     * Ejemplos de uso (suponiendo que existe un método "esPrimitivo(expr)"):
      *
      *      1. predicado(esPrimitivo(expr.tipo), "La expresión debe ser de un tipo primitivo", expr.getStart());
      *      2. predicado(esPrimitivo(expr.tipo), "La expresión debe ser de un tipo primitivo", expr); // Se asume getStart()
@@ -86,13 +90,13 @@ public class TypeChecking extends DefaultVisitor {
      * @param posicionError Fila y columna del fichero donde se ha producido el error.
      */
 
+    private void predicado(boolean condition, String errorMessage, AST node) {
+        predicado(condition, errorMessage, node.getStart());
+    }
+
     private void predicado(boolean condition, String errorMessage, Position position) {
         if (!condition)
             errorManager.notify("Type Checking", errorMessage, position);
-    }
-
-    private void predicado(boolean condition, String errorMessage, AST node) {
-        predicado(condition, errorMessage, node.getStart());
     }
 
     private ErrorManager errorManager;

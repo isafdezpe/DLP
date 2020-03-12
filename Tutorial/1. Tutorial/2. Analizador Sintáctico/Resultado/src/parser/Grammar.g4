@@ -9,7 +9,8 @@ variable: tipo IDENT ';';
 
 tipo: 'float' | 'int';
 
-sentence: 'print' expr ';' | expr '=' expr ';';
+sentence: 'print' expr ';'
+    | expr '=' expr ';';
 
 expr
 	: expr ('*' | '/') expr

@@ -27,16 +27,17 @@ import codegeneration.*;
  * - Para Generación de Código: 'MemoryAllocation.java' y 'CodeSelection.java'.
  */
 public class Main {
-    public static final String program = "source.txt"; // Fichero de prueba durante el desarrollo
+    public static final String INPUT_FILE = "source.txt"; // Fichero de prueba durante el desarrollo
+    public static final String OUTPUT_FILE = "output.txt";
 
     public static void main(String[] args) throws Exception {
         ErrorManager errorManager = new ErrorManager();
 
-        AST ast = compile(program, errorManager); // Poner args[0] en vez de "program" en la versión final
+        AST ast = compile(INPUT_FILE, errorManager); // Sustituir "INPUT_FILE" por args[0] en la versión final
         if (errorManager.errorsCount() == 0)
             System.out.println("El programa se ha compilado correctamente.");
 
-        ASTPrinter.toHtml(program, ast, "AST"); // Utilidad generada por VGen (opcional)
+        ASTPrinter.toHtml(INPUT_FILE, ast, "AST"); // Utilidad generada por VGen (opcional)
     }
 
     /**
@@ -67,7 +68,7 @@ public class Main {
 
         // 3. Fase de Generación de Código
         File sourceFile = new File(sourceName);
-        Writer out = new FileWriter(new File(sourceFile.getParent(), "output.txt"));
+        Writer out = new FileWriter(new File(sourceFile.getParent(), OUTPUT_FILE));
 
         CodeGeneration generator = new CodeGeneration();
         generator.generate(sourceFile.getName(), ast, out);

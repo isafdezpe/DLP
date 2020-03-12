@@ -47,6 +47,14 @@ public class FuncInvocationExpression extends AbstractExpression {
         this.args = args;
     }
 
+    public FunDefinition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(FunDefinition definition) {
+        this.definition = definition;
+    }
+
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
@@ -54,6 +62,7 @@ public class FuncInvocationExpression extends AbstractExpression {
 
     private String name;
     private List<Expression> args;
+    private FunDefinition definition;
 
     public String toString() {
         return "{name:" + getName() + ", args:" + getArgs() + "}";

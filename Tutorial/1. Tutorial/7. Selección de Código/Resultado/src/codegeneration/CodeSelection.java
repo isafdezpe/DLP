@@ -47,7 +47,7 @@ public class CodeSelection extends DefaultVisitor {
 
     //	class Print { Expression expression; }
     public Object visit(Print node, Object param) {
-        out("#line " + node.getEnd().getLine());
+        line(node);
         node.getExpression().accept(this, CodeFunction.VALUE);
         out("out", node.getExpression().getType());
         return null;
@@ -55,7 +55,7 @@ public class CodeSelection extends DefaultVisitor {
 
     //	class Assignment { Expression left;  Expression right; }
     public Object visit(Assignment node, Object param) {
-        out("#line " + node.getEnd().getLine());
+        line(node);
         node.getLeft().accept(this, CodeFunction.ADDRESS);
         node.getRight().accept(this, CodeFunction.VALUE);
         out("store", node.getLeft().getType());
@@ -98,18 +98,27 @@ public class CodeSelection extends DefaultVisitor {
         return null;
     }
 
-    // Método auxiliar
-    private void out(String instruccion, Type tipo) {
-        out(instruccion + tipo.getSuffix());
-    }
-
+    // # ----------------------------------------------------------
     // Métodos auxiliares recomendados (opcionales) -------------
+
+    // Imprime una línea en el fichero de salida
     private void out(String instruction) {
         writer.println(instruction);
     }
 
+    private void out(String instruccion, Type tipo) {
+        out(instruccion + tipo.getSuffix());
+    }
+
+    private void line(AST node) {
+        line(node.getEnd());
+    }
+
     private void line(Position pos) {
-        out("\n#line " + pos.getLine());
+        if (pos != null)
+            out("\n#line " + pos.getLine());
+        else
+            System.out.println("#line no generado. Se ha pasado una Position null. Falta información en el AST");
     }
 
     private PrintWriter writer;
