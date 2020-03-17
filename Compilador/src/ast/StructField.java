@@ -12,47 +12,58 @@ import visitor.*;
 
 public class StructField extends AbstractDefinition {
 
-	public StructField(String name, Type type) {
-		this.name = name;
-		this.type = type;
+    public StructField(String name, Type type) {
+        this.name = name;
+        this.type = type;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(type);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(type);
+    }
 
-	public StructField(Object name, Object type) {
-		this.name = (name instanceof Token) ? ((Token)name).getText() : (String) name;
-		this.type = (Type) getAST(type);
+    public StructField(Object name, Object type) {
+        this.name = (name instanceof Token) ? ((Token) name).getText() : (String) name;
+        this.type = (Type) getAST(type);
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(name, type);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(name, type);
+    }
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Type getType() {
-		return type;
-	}
-	public void setType(Type type) {
-		this.type = type;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public Type getType() {
+        return type;
+    }
 
-	private String name;
-	private Type type;
+    public void setType(Type type) {
+        this.type = type;
+    }
 
-	public String toString() {
-       return "{name:" + getName() + ", type:" + getType() + "}";
-   }
+    public Definition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(StructDefinition definition) {
+        this.definition = definition;
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private String name;
+    private Type type;
+    private StructDefinition definition;
+
+    public String toString() {
+        return "{name:" + getName() + ", type:" + getType() + "}";
+    }
 }

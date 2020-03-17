@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ast.*;
+import ast.VarDefinition.VarScope;
 import main.*;
 import visitor.*;
 
@@ -19,18 +20,9 @@ public class Identification extends DefaultVisitor {
     }
 
     // # ----------------------------------------------------------
-    /*
-    * Poner aquí los visit.
-    *
-    * Si se ha usado VGen, solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-    */
-
-    // public Object visit(Program prog, Object param) {
-    //      ...
-    // }
 
     public Object visit(FunDefinition node, Object param) {
-        predicado(funciones.get(node.getName()) == null, "Error: función ya definida " + node.getName(), node);
+        predicado(funciones.get(node.getName()) == null, "Función ya definida: " + node.getName(), node);
         funciones.put(node.getName(), node);
 
         variables.set();
@@ -47,7 +39,7 @@ public class Identification extends DefaultVisitor {
 
         FunDefinition definition = funciones.get(node.getName());
 
-        predicado(definition != null, "Error: procedimiento no definido " + node.getName(), node);
+        predicado(definition != null, "Procedimiento no definido: " + node.getName(), node);
 
         node.setDefinition(definition);
 
@@ -59,9 +51,61 @@ public class Identification extends DefaultVisitor {
 
         FunDefinition definition = funciones.get(node.getName());
 
-        predicado(definition != null, "Error: función no definida " + node.getName(), node);
+        predicado(definition != null, "Función no definida: " + node.getName(), node);
 
         node.setDefinition(definition);
+
+        return null;
+    }
+
+    public Object visit(StructDefinition node, Object param) {
+        predicado(variables.getFromAny(node.getName().getType()) == null,
+                "Estructura ya definida: " + node.getName().getType(), node);
+
+        variables.put(node.getName().getType(), node);
+        structs.put(node.getName().getType(), node);
+
+        variables.set();
+
+        super.visit(node, param);
+
+        variables.reset();
+
+        return null;
+    }
+
+    public Object visit(StructField node, Object param) {
+        super.visit(node, param);
+
+        Definition definition = variables.getFromTop(node.getName());
+
+        predicado(definition == null, "Campo ya definido en la estructura: " + node.getName(), node);
+
+        node.setDefinition((StructDefinition) param);
+
+        variables.put(node.getName(), node);
+
+        return null;
+    }
+
+    public Object visit(VarDefinition node, Object param) {
+        super.visit(node, param);
+
+        predicado(variables.getFromTop(node.getName()) == null, "Variable ya definida: " + node.getName(), node);
+
+        node.setScope(param instanceof VarScope ? (VarScope) param : VarScope.GLOBAL);
+
+        variables.put(node.getName(), node);
+
+        return null;
+    }
+
+    public Object visit(Variable node, Object param) {
+        Definition definition = variables.getFromAny(node.getName());
+
+        predicado(definition != null, "Variable no definida: " + node.getName(), node);
+
+        node.setDefinition((VarDefinition) definition);
 
         return null;
     }
@@ -105,5 +149,6 @@ public class Identification extends DefaultVisitor {
 
     private ErrorManager errorManager;
     private Map<String, FunDefinition> funciones = new HashMap<String, FunDefinition>();
-    private ContextMap<String, VarDefinition> variables = new ContextMap();
+    private ContextMap<String, Definition> variables = new ContextMap();
+    private Map<String, StructDefinition> structs = new HashMap<String, StructDefinition>();
 }

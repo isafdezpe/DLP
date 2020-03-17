@@ -41,6 +41,14 @@ public class Variable extends AbstractExpression {
         this.scope = scope;
     }
 
+    public VarDefinition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(VarDefinition definition) {
+        this.definition = definition;
+    }
+
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
@@ -48,6 +56,7 @@ public class Variable extends AbstractExpression {
 
     private String name;
     private VarScope scope;
+    private VarDefinition definition;
 
     public String toString() {
         return "{name:" + getName() + "}";
