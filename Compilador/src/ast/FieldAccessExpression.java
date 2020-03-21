@@ -12,47 +12,49 @@ import visitor.*;
 
 public class FieldAccessExpression extends AbstractExpression {
 
-	public FieldAccessExpression(Expression expr, String name) {
-		this.expr = expr;
-		this.name = name;
+    public FieldAccessExpression(Expression expr, String name) {
+        this.expr = expr;
+        this.name = name;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(expr);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(expr);
+    }
 
-	public FieldAccessExpression(Object expr, Object name) {
-		this.expr = (Expression) getAST(expr);
-		this.name = (name instanceof Token) ? ((Token)name).getText() : (String) name;
+    public FieldAccessExpression(Object expr, Object name) {
+        this.expr = (Expression) getAST(expr);
+        this.name = (name instanceof Token) ? ((Token) name).getText() : (String) name;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(expr, name);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(expr, name);
+    }
 
-	public Expression getExpr() {
-		return expr;
-	}
-	public void setExpr(Expression expr) {
-		this.expr = expr;
-	}
+    public Expression getExpr() {
+        return expr;
+    }
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setExpr(Expression expr) {
+        this.expr = expr;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public String getName() {
+        return name;
+    }
 
-	private Expression expr;
-	private String name;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String toString() {
-       return "{expr:" + getExpr() + ", name:" + getName() + "}";
-   }
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private Expression expr;
+    private String name;
+
+    public String toString() {
+        return "{expr:" + getExpr() + ", name:" + getName() + "}";
+    }
 }

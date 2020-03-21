@@ -6,17 +6,16 @@ package ast;
 
 import visitor.*;
 
-//	voidConstant:expression -> 
+//	voidConstant:expression ->
 
 public class VoidConstant extends AbstractExpression {
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
 
-
-	public String toString() {
-       return "{VoidConstant}";
-   }
+    public String toString() {
+        return "{VoidConstant}";
+    }
 }

@@ -12,47 +12,49 @@ import visitor.*;
 
 public class CastExpression extends AbstractExpression {
 
-	public CastExpression(Type type, Expression expr) {
-		this.type = type;
-		this.expr = expr;
+    public CastExpression(Type type, Expression expr) {
+        this.type = type;
+        this.expr = expr;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(type, expr);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(type, expr);
+    }
 
-	public CastExpression(Object type, Object expr) {
-		this.type = (Type) getAST(type);
-		this.expr = (Expression) getAST(expr);
+    public CastExpression(Object type, Object expr) {
+        this.type = (Type) getAST(type);
+        this.expr = (Expression) getAST(expr);
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(type, expr);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(type, expr);
+    }
 
-	public Type getType() {
-		return type;
-	}
-	public void setType(Type type) {
-		this.type = type;
-	}
+    public Type getType() {
+        return type;
+    }
 
-	public Expression getExpr() {
-		return expr;
-	}
-	public void setExpr(Expression expr) {
-		this.expr = expr;
-	}
+    public void setType(Type type) {
+        this.type = type;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public Expression getExpr() {
+        return expr;
+    }
 
-	private Type type;
-	private Expression expr;
+    public void setExpr(Expression expr) {
+        this.expr = expr;
+    }
 
-	public String toString() {
-       return "{type:" + getType() + ", expr:" + getExpr() + "}";
-   }
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private Type type;
+    private Expression expr;
+
+    public String toString() {
+        return "{type:" + getType() + ", expr:" + getExpr() + "}";
+    }
 }

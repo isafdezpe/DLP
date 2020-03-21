@@ -5,5 +5,5 @@
 package ast;
 
 public abstract class AbstractDefinition extends AbstractAST implements Definition {
-
+    public Definition definition;
 }

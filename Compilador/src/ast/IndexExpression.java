@@ -12,47 +12,49 @@ import visitor.*;
 
 public class IndexExpression extends AbstractExpression {
 
-	public IndexExpression(Expression expr, Expression index) {
-		this.expr = expr;
-		this.index = index;
+    public IndexExpression(Expression expr, Expression index) {
+        this.expr = expr;
+        this.index = index;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(expr, index);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(expr, index);
+    }
 
-	public IndexExpression(Object expr, Object index) {
-		this.expr = (Expression) getAST(expr);
-		this.index = (Expression) getAST(index);
+    public IndexExpression(Object expr, Object index) {
+        this.expr = (Expression) getAST(expr);
+        this.index = (Expression) getAST(index);
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(expr, index);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(expr, index);
+    }
 
-	public Expression getExpr() {
-		return expr;
-	}
-	public void setExpr(Expression expr) {
-		this.expr = expr;
-	}
+    public Expression getExpr() {
+        return expr;
+    }
 
-	public Expression getIndex() {
-		return index;
-	}
-	public void setIndex(Expression index) {
-		this.index = index;
-	}
+    public void setExpr(Expression expr) {
+        this.expr = expr;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public Expression getIndex() {
+        return index;
+    }
 
-	private Expression expr;
-	private Expression index;
+    public void setIndex(Expression index) {
+        this.index = index;
+    }
 
-	public String toString() {
-       return "{expr:" + getExpr() + ", index:" + getIndex() + "}";
-   }
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private Expression expr;
+    private Expression index;
+
+    public String toString() {
+        return "{expr:" + getExpr() + ", index:" + getIndex() + "}";
+    }
 }
