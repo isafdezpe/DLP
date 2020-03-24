@@ -98,6 +98,17 @@ public class Identification extends DefaultVisitor {
         return null;
     }
 
+    public Object visit(VarType node, Object param) {
+        super.visit(node, param);
+
+        StructDefinition definition = structs.get(node.getType());
+        predicado(definition != null, "Struct no definido: " + node.getType(), node);
+
+        node.setDefinition(definition);
+
+        return null;
+    }
+
     public Object visit(VarDefinition node, Object param) {
         super.visit(node, param);
 

@@ -40,6 +40,16 @@ public class VarType extends AbstractType {
         this.definition = definition;
     }
 
+    public StructField getField(String name) {
+        for (StructField field : definition.getDefinitions()) {
+            if (field.getName().equals(name)) {
+                return field;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);

@@ -12,8 +12,8 @@ import visitor.*;
 
 public class CastExpression extends AbstractExpression {
 
-    public CastExpression(Type type, Expression expr) {
-        this.type = type;
+    public CastExpression(Type castType, Expression expr) {
+        this.castType = castType;
         this.expr = expr;
 
         // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
@@ -21,13 +21,21 @@ public class CastExpression extends AbstractExpression {
         setPositions(type, expr);
     }
 
-    public CastExpression(Object type, Object expr) {
-        this.type = (Type) getAST(type);
+    public CastExpression(Object castType, Object expr) {
+        this.castType = (Type) getAST(castType);
         this.expr = (Expression) getAST(expr);
 
         // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
         // Obtiene la linea/columna a partir de las de los hijos.
-        setPositions(type, expr);
+        setPositions(castType, expr);
+    }
+
+    public Type getCastType() {
+        return castType;
+    }
+
+    public void setCastType(Type castType) {
+        this.castType = castType;
     }
 
     public Type getType() {
@@ -51,10 +59,11 @@ public class CastExpression extends AbstractExpression {
         return v.visit(this, param);
     }
 
-    private Type type;
+    private Type castType;
     private Expression expr;
+    private Type type;
 
     public String toString() {
-        return "{type:" + getType() + ", expr:" + getExpr() + "}";
+        return "{type:" + getCastType() + ", expr:" + getExpr() + "}";
     }
 }
