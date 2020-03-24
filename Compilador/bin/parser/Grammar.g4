@@ -49,7 +49,7 @@ params returns[List<VarDefinition> list = new ArrayList<VarDefinition>()]
 	;
 
 param returns[VarDefinition ast]
-	: IDENT ':' type { $ast = new VarDefinition($IDENT,$type.ast,VarScope.LOCAL); }
+	: IDENT ':' type { $ast = new VarDefinition($IDENT,$type.ast,VarScope.PARAM); }
 	;
 
 sentences returns[List<Sentence> list = new ArrayList<Sentence>()]
@@ -61,9 +61,8 @@ sentence returns[Sentence ast]
 	| 'read' expr ';'												{ $ast = new Read($expr.ast); }
 	| 'print' expr ';'												{ $ast = new Print($expr.ast); }
 	| 'printsp' expr ';'											{ $ast = new Printsp($expr.ast); }
-	| 'printsp' ';'													{ $ast = new Printsp(null); }
 	| 'println' expr ';'											{ $ast = new Println($expr.ast); }
-	| 'println' ';'													{ $ast = new Println(null); }
+	| 'println' ';'													{ $ast = new Println(new VoidConstant()); }
 	| 'return' ';'													{ $ast = new Return(new VoidConstant()); }
 	| 'return' expr ';'												{ $ast = new Return($expr.ast); }
 	| 'if' '(' expr ')' '{' sentences '}'							{ $ast = new IfElse($expr.ast, $ctx.sentences(0).list, null); }

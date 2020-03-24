@@ -13,47 +13,58 @@ import visitor.*;
 
 public class While extends AbstractSentence {
 
-	public While(Expression expression, List<Sentence> sentence) {
-		this.expression = expression;
-		this.sentence = sentence;
+    public While(Expression expression, List<Sentence> sentence) {
+        this.expression = expression;
+        this.sentence = sentence;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(expression, sentence);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(expression, sentence);
+    }
 
-	public While(Object expression, Object sentence) {
-		this.expression = (Expression) getAST(expression);
-		this.sentence = this.<Sentence>getAstFromContexts(sentence);
+    public While(Object expression, Object sentence) {
+        this.expression = (Expression) getAST(expression);
+        this.sentence = this.<Sentence>getAstFromContexts(sentence);
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(expression, sentence);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(expression, sentence);
+    }
 
-	public Expression getExpression() {
-		return expression;
-	}
-	public void setExpression(Expression expression) {
-		this.expression = expression;
-	}
+    public Expression getExpression() {
+        return expression;
+    }
 
-	public List<Sentence> getSentence() {
-		return sentence;
-	}
-	public void setSentence(List<Sentence> sentence) {
-		this.sentence = sentence;
-	}
+    public void setExpression(Expression expression) {
+        this.expression = expression;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public FunDefinition getDefinition() {
+        return definition;
+    }
 
-	private Expression expression;
-	private List<Sentence> sentence;
+    public void setDefinition(FunDefinition definition) {
+        this.definition = definition;
+    }
 
-	public String toString() {
-       return "{expression:" + getExpression() + ", sentence:" + getSentence() + "}";
-   }
+    public List<Sentence> getSentence() {
+        return sentence;
+    }
+
+    public void setSentence(List<Sentence> sentence) {
+        this.sentence = sentence;
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private Expression expression;
+    private List<Sentence> sentence;
+    private FunDefinition definition;
+
+    public String toString() {
+        return "{expression:" + getExpression() + ", sentence:" + getSentence() + "}";
+    }
 }

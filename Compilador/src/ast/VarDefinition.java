@@ -13,7 +13,7 @@ import visitor.*;
 public class VarDefinition extends AbstractDefinition {
 
     public enum VarScope {
-        GLOBAL, LOCAL
+        GLOBAL, LOCAL, PARAM
     };
 
     public VarDefinition(String name, Type type, VarScope scope) {

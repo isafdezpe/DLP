@@ -27,7 +27,16 @@ public class Identification extends DefaultVisitor {
 
         variables.set();
 
-        super.visit(node, param);
+        for (VarDefinition p : node.getParams())
+            p.accept(this, VarScope.PARAM);
+
+        for (VarDefinition d : node.getDefinitions())
+            d.accept(this, VarScope.LOCAL);
+
+        for (Sentence s : node.getSentences())
+            s.accept(this, node);
+
+        node.getReturn_t().accept(this, param);
 
         variables.reset();
 
@@ -67,7 +76,8 @@ public class Identification extends DefaultVisitor {
 
         variables.set();
 
-        super.visit(node, param);
+        for (StructField d : node.getDefinitions())
+            d.accept(this, node);
 
         variables.reset();
 
@@ -106,6 +116,78 @@ public class Identification extends DefaultVisitor {
         predicado(definition != null, "Variable no definida: " + node.getName(), node);
 
         node.setDefinition((VarDefinition) definition);
+
+        return null;
+    }
+
+    public Object visit(Return node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(Print node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(Printsp node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(Println node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(Read node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(Assignment node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(IfElse node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
+
+        return null;
+    }
+
+    public Object visit(While node, Object param) {
+        super.visit(node, param);
+
+        if (param instanceof FunDefinition)
+            node.setDefinition((FunDefinition) param);
 
         return null;
     }

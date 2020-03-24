@@ -12,47 +12,58 @@ import visitor.*;
 
 public class Assignment extends AbstractSentence {
 
-	public Assignment(Expression left, Expression right) {
-		this.left = left;
-		this.right = right;
+    public Assignment(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(left, right);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(left, right);
+    }
 
-	public Assignment(Object left, Object right) {
-		this.left = (Expression) getAST(left);
-		this.right = (Expression) getAST(right);
+    public Assignment(Object left, Object right) {
+        this.left = (Expression) getAST(left);
+        this.right = (Expression) getAST(right);
 
-       // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
-       // Obtiene la linea/columna a partir de las de los hijos.
-       setPositions(left, right);
-	}
+        // Lo siguiente se puede borrar si no se quiere la posicion en el fichero.
+        // Obtiene la linea/columna a partir de las de los hijos.
+        setPositions(left, right);
+    }
 
-	public Expression getLeft() {
-		return left;
-	}
-	public void setLeft(Expression left) {
-		this.left = left;
-	}
+    public Expression getLeft() {
+        return left;
+    }
 
-	public Expression getRight() {
-		return right;
-	}
-	public void setRight(Expression right) {
-		this.right = right;
-	}
+    public void setLeft(Expression left) {
+        this.left = left;
+    }
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    public Expression getRight() {
+        return right;
+    }
 
-	private Expression left;
-	private Expression right;
+    public void setRight(Expression right) {
+        this.right = right;
+    }
 
-	public String toString() {
-       return "{left:" + getLeft() + ", right:" + getRight() + "}";
-   }
+    public FunDefinition getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(FunDefinition definition) {
+        this.definition = definition;
+    }
+
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
+
+    private Expression left;
+    private Expression right;
+    private FunDefinition definition;
+
+    public String toString() {
+        return "{left:" + getLeft() + ", right:" + getRight() + "}";
+    }
 }
