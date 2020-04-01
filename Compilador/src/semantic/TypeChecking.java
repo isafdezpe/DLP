@@ -62,8 +62,7 @@ public class TypeChecking extends DefaultVisitor {
     public Object visit(Println node, Object param) {
         super.visit(node, param);
 
-        if (!mismoTipo(node.getExpression().getType(), ErrorType.class)
-                && !node.getExpression().getClass().equals(VoidConstant.class))
+        if (!mismoTipo(node.getExpression().getType(), ErrorType.class))
             predicado(esPrimitivo(node.getExpression().getType()), "La expresión a imprimir debe ser de tipo simple",
                     node);
 

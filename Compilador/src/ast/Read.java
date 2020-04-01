@@ -36,12 +36,20 @@ public class Read extends AbstractSentence {
         this.expression = expression;
     }
 
-    public FunDefinition getDefinition() {
+    public FunDefinition getFunDefinition() {
         return definition;
     }
 
-    public void setDefinition(FunDefinition definition) {
+    public void setFunDefinition(FunDefinition definition) {
         this.definition = definition;
+    }
+
+    public VarDefinition getVarDefinition() {
+        return varDefinition;
+    }
+
+    public void setVarDefinition(VarDefinition definition) {
+        this.varDefinition = definition;
     }
 
     @Override
@@ -51,6 +59,7 @@ public class Read extends AbstractSentence {
 
     private Expression expression;
     private FunDefinition definition;
+    private VarDefinition varDefinition;
 
     public String toString() {
         return "{expression:" + getExpression() + "}";

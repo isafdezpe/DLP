@@ -171,7 +171,13 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
+
+        if (node.getExpression() instanceof Variable) {
+            Definition definition = variables.getFromAny(((Variable) node.getExpression()).getName());
+            predicado(definition != null, "Variable no definida: " + ((Variable) node.getExpression()).getName(), node);
+            node.setVarDefinition((VarDefinition) definition);
+        }
 
         return null;
     }
