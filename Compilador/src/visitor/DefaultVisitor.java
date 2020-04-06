@@ -79,8 +79,8 @@ public class DefaultVisitor implements Visitor {
 
     //	class ArrayType { IntConstant size;  Type type; }
     public Object visit(ArrayType node, Object param) {
-        if (node.getSize() != null)
-            node.getSize().accept(this, param);
+        if (node.getArraySize() != null)
+            node.getArraySize().accept(this, param);
         if (node.getType() != null)
             node.getType().accept(this, param);
         return null;

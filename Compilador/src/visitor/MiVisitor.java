@@ -99,9 +99,9 @@ public class MiVisitor extends DefaultVisitor {
 
         // super.visit(node, param);
 
-        if (node.getSize() != null) {
+        if (node.getArraySize() != null) {
             System.out.print("[");
-            node.getSize().accept(this, param);
+            node.getArraySize().accept(this, param);
             System.out.print("]");
         }
 

@@ -6,17 +6,21 @@ package ast;
 
 import visitor.*;
 
-//	voidType:type -> 
+//	voidType:type ->
 
 public class VoidType extends AbstractType {
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
 
+    public String toString() {
+        return "{VoidType}";
+    }
 
-	public String toString() {
-       return "{VoidType}";
-   }
+    @Override
+    public int getSize() {
+        return 0;
+    }
 }

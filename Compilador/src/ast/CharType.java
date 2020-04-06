@@ -6,17 +6,21 @@ package ast;
 
 import visitor.*;
 
-//	charType:type -> 
+//	charType:type ->
 
 public class CharType extends AbstractType {
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
 
+    public String toString() {
+        return "{CharType}";
+    }
 
-	public String toString() {
-       return "{CharType}";
-   }
+    @Override
+    public int getSize() {
+        return 1;
+    }
 }

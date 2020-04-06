@@ -38,9 +38,11 @@
 <span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">6:5  6:16    </span><span class="sourceText">var </span><span class="posText">juan:Persona</span><span class="sourceText">;</span>
 <span class="dots">.  .  |  </span>"<span class="value">juan</span>"  
 <span class="dots">.  .  |  </span>"Persona"  <span class="type">VarType.type</span>                            <span class="pos">6:10  6:16   </span><span class="sourceText">var juan:</span><span class="posText">Persona</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">7:5  7:17    </span><span class="sourceText">var </span><span class="posText">anton:Persona</span><span class="sourceText">;</span>
 <span class="dots">.  .  |  </span>"<span class="value">anton</span>"  
 <span class="dots">.  .  |  </span>"Persona"  <span class="type">VarType.type</span>                            <span class="pos">7:11  7:17   </span><span class="sourceText">var anton:</span><span class="posText">Persona</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  </span>FunDefinition &rarr;                                       <span class="pos">9:1  9:11    </span><span class="sourceText"></span><span class="posText">g():Persona</span><span class="sourceText"> {	// Error: Retorno de tipo no simple</span>
 <span class="dots">.  .  |  </span>"<span class="value">g</span>"  
 <span class="dots">.  .  |  </span>params  <span class="type">List&lt;Definition&gt;</span> = 
@@ -55,6 +57,7 @@
 <span class="dots">.  .  |  .  |  </span>ArrayType &rarr;                                  <span class="pos">13:6  13:7   </span><span class="sourceText">f(a:[</span><span class="posText">10</span><span class="sourceText">] int) {	// Los parámetros deben de ser tipos primitivos</span>
 <span class="dots">.  .  |  .  |  .  </span>"10"  <span class="type">IntConstant.value</span>                   <span class="pos">13:6  13:7   </span><span class="sourceText">f(a:[</span><span class="posText">10</span><span class="sourceText">] int) {	// Los parámetros deben de ser tipos primitivos</span>
 <span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  |  </span><span class="value">VoidType</span> &rarr;                                         <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">.  .  |  </span>definitions  <span class="type">List&lt;VarDefinition&gt;</span> = 
 <span class="dots">.  .  |  </span>sentences  <span class="type">List&lt;Sentence&gt;</span> = 
@@ -74,9 +77,11 @@
 <span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">21:3  21:3   </span><span class="sourceText">j(</span><span class="posText">a</span><span class="sourceText">:int, b:float):float {</span>
 <span class="dots">.  .  |  .  |  </span>"<span class="value">a</span>"  
 <span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">21:10  21:10 </span><span class="sourceText">j(a:int, </span><span class="posText">b</span><span class="sourceText">:float):float {</span>
 <span class="dots">.  .  |  .  |  </span>"<span class="value">b</span>"  
 <span class="dots">.  .  |  .  |  </span><span class="value">RealType</span> &rarr;                                   <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  |  </span><span class="value">RealType</span> &rarr;                                         <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">.  .  |  </span>definitions  <span class="type">List&lt;VarDefinition&gt;</span> = 
 <span class="dots">.  .  |  </span>sentences  <span class="type">List&lt;Sentence&gt;</span> = 
@@ -94,14 +99,17 @@
 <span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">27:6  27:6   </span><span class="sourceText">var </span><span class="posText">i</span><span class="sourceText">:int;</span>
 <span class="dots">.  .  |  .  |  </span>"<span class="value">i</span>"  
 <span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">28:6  28:6   </span><span class="sourceText">var </span><span class="posText">f</span><span class="sourceText">:float;</span>
 <span class="dots">.  .  |  .  |  </span>"<span class="value">f</span>"  
 <span class="dots">.  .  |  .  |  </span><span class="value">RealType</span> &rarr;                                   <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">29:6  29:10  </span><span class="sourceText">var </span><span class="posText">v:[10</span><span class="sourceText">]int;</span>
 <span class="dots">.  .  |  .  |  </span>"<span class="value">v</span>"  
 <span class="dots">.  .  |  .  |  </span>ArrayType &rarr;                                  <span class="pos">29:9  29:10  </span><span class="sourceText">var v:[</span><span class="posText">10</span><span class="sourceText">]int;</span>
 <span class="dots">.  .  |  .  |  .  </span>"10"  <span class="type">IntConstant.value</span>                   <span class="pos">29:9  29:10  </span><span class="sourceText">var v:[</span><span class="posText">10</span><span class="sourceText">]int;</span>
 <span class="dots">.  .  |  .  |  .  </span><span class="value">IntType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
 <span class="dots">.  .  |  </span>sentences  <span class="type">List&lt;Sentence&gt;</span> = 
 <span class="dots">.  .  |  .  </span>IfElse &rarr;                                        <span class="pos">31:5  31:7   </span><span class="sourceText">if(</span><span class="posText">2.5</span><span class="sourceText">) { }	// La condicion debe ser de tipo entero</span>
 <span class="dots">.  .  |  .  |  </span>"2.5"  <span class="type">RealConstant.value</span>                    <span class="pos">31:5  31:7   </span><span class="sourceText">if(</span><span class="posText">2.5</span><span class="sourceText">) { }	// La condicion debe ser de tipo entero</span>

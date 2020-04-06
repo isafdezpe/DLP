@@ -6,17 +6,21 @@ package ast;
 
 import visitor.*;
 
-//	intType:type -> 
+//	intType:type ->
 
 public class IntType extends AbstractType {
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
 
+    public String toString() {
+        return "{IntType}";
+    }
 
-	public String toString() {
-       return "{IntType}";
-   }
+    @Override
+    public int getSize() {
+        return 2;
+    }
 }

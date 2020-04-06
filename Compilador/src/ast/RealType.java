@@ -6,17 +6,21 @@ package ast;
 
 import visitor.*;
 
-//	realType:type -> 
+//	realType:type ->
 
 public class RealType extends AbstractType {
 
-	@Override
-	public Object accept(Visitor v, Object param) { 
-		return v.visit(this, param);
-	}
+    @Override
+    public Object accept(Visitor v, Object param) {
+        return v.visit(this, param);
+    }
 
+    @Override
+    public int getSize() {
+        return 4;
+    }
 
-	public String toString() {
-       return "{RealType}";
-   }
+    public String toString() {
+        return "{RealType}";
+    }
 }

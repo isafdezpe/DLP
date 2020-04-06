@@ -60,6 +60,14 @@ public class VarDefinition extends AbstractDefinition {
         this.scope = scope;
     }
 
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
+
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
@@ -68,8 +76,10 @@ public class VarDefinition extends AbstractDefinition {
     private String name;
     private Type type;
     private VarScope scope;
+    private int address;
 
     public String toString() {
         return "{name:" + getName() + ", type:" + getType() + ", scope:" + getScope() + "}";
     }
+
 }

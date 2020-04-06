@@ -78,6 +78,14 @@ public class FunDefinition extends AbstractDefinition {
         this.sentences = sentences;
     }
 
+    public void setReturn(boolean hasReturn) {
+        this.hasReturn = hasReturn;
+    }
+
+    public boolean hasReturn() {
+        return hasReturn;
+    }
+
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
@@ -88,6 +96,7 @@ public class FunDefinition extends AbstractDefinition {
     private Type return_t;
     private List<VarDefinition> definitions;
     private List<Sentence> sentences;
+    private boolean hasReturn;
 
     public String toString() {
         return "{name:" + getName() + ", params:" + getParams() + ", return_t:" + getReturn_t() + ", definitions:"

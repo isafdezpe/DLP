@@ -6,6 +6,7 @@
 package codegeneration;
 
 import ast.*;
+import ast.VarDefinition.VarScope;
 import visitor.*;
 
 /**
@@ -13,14 +14,17 @@ import visitor.*;
  */
 public class MemoryAllocation extends DefaultVisitor {
 
-    /*
-    * Poner aquí los visit.
-    *
-    * Si se ha usado VGen, solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-    */
+    private int currentAddress = 0;
 
-    // public Object visit(Program prog, Object param) {
-    //      ...
-    // }
+    public Object visit(VarDefinition node, Object param) {
+        super.visit(node, param);
+
+        if (node.getScope().equals(VarScope.GLOBAL)) {
+            node.setAddress(currentAddress);
+            currentAddress += node.getType().getSize();
+        }
+
+        return null;
+    }
 
 }

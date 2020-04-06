@@ -34,7 +34,8 @@ public class TypeChecking extends DefaultVisitor {
     public Object visit(ArrayType node, Object param) {
         super.visit(node, param);
 
-        predicado(Integer.parseInt(node.getSize().getValue()) > 0, "El tamaño del array debe ser mayor que cero", node);
+        predicado(Integer.parseInt(node.getArraySize().getValue()) > 0, "El tamaño del array debe ser mayor que cero",
+                node);
 
         return null;
     }
@@ -91,6 +92,8 @@ public class TypeChecking extends DefaultVisitor {
         predicado(mismoTipo(node.getDefinition().getReturn_t(), node.getExpression().getType().getClass()),
                 "La expresión a retornar debe ser de tipo " + node.getDefinition().getReturn_t(), node);
 
+        node.getDefinition().setReturn(true);
+
         return null;
     }
 
@@ -112,9 +115,26 @@ public class TypeChecking extends DefaultVisitor {
     }
 
     public Object visit(IfElse node, Object param) {
+        boolean hasReturn = node.getDefinition().hasReturn();
+
         super.visit(node, param);
 
-        predicado(node.getExpression().getType() instanceof IntType, "La condición debe ser de tipo entero", node);
+        predicado(mismoTipo(node.getExpression().getType(), IntType.class), "La condición debe ser de tipo entero",
+                node);
+
+        boolean returnIf = false;
+        boolean returnElse = false;
+
+        for (Sentence child : node.getIf_s())
+            if (child instanceof Return)
+                returnIf = true;
+
+        for (Sentence child : node.getElse_s())
+            if (child instanceof Return)
+                returnElse = true;
+
+        if (!hasReturn)
+            node.getDefinition().setReturn(returnIf && returnElse);
 
         return null;
     }
@@ -122,7 +142,8 @@ public class TypeChecking extends DefaultVisitor {
     public Object visit(While node, Object param) {
         super.visit(node, param);
 
-        predicado(node.getExpression().getType() instanceof IntType, "La condición debe ser de tipo entero", node);
+        predicado(mismoTipo(node.getExpression().getType(), IntType.class), "La condición debe ser de tipo entero",
+                node);
 
         return null;
     }
@@ -325,17 +346,6 @@ public class TypeChecking extends DefaultVisitor {
 
         return null;
     }
-
-    /*
-    visit(Nodo padre) {
-        Para cada hijoi { // Los hijos deben recorrerse de izquierda a derecha
-            Asignar valor a los atributos de hijoi que sean heredados
-            visitar(hijoi) // Al volver, el hijo tendrá ya asignados todos sus atributos sintetizados
-        }
-        Comprobar los predicados asociados a la regla p (B(p))
-        Asignar valor a los atributos sintetizados de padre (R(p))
-    }
-     */
 
     // # ----------------------------------------------------------
     // Métodos auxiliares recomendados (opcionales) -------------

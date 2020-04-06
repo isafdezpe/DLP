@@ -61,4 +61,14 @@ public class VarType extends AbstractType {
     public String toString() {
         return "{type:" + getType() + "}";
     }
+
+    @Override
+    public int getSize() {
+        int size = 0;
+        for (StructField child : definition.getDefinitions()) {
+            size += child.getType().getSize();
+        }
+
+        return size;
+    }
 }
