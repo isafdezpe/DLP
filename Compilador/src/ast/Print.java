@@ -36,21 +36,12 @@ public class Print extends AbstractSentence {
         this.expression = expression;
     }
 
-    public FunDefinition getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(FunDefinition definition) {
-        this.definition = definition;
-    }
-
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
     }
 
     private Expression expression;
-    private FunDefinition definition;
 
     public String toString() {
         return "{expression:" + getExpression() + "}";

@@ -6,4 +6,7 @@ package ast;
 
 public interface Definition extends AST {
 
+    public int getAddress();
+
+    public void setAddress(int address);
 }

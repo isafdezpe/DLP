@@ -89,10 +89,10 @@ public class TypeChecking extends DefaultVisitor {
             predicado(esPrimitivo(node.getExpression().getType()), "La expresión a retornar debe ser de tipo simple",
                     node);
 
-        predicado(mismoTipo(node.getDefinition().getReturn_t(), node.getExpression().getType().getClass()),
-                "La expresión a retornar debe ser de tipo " + node.getDefinition().getReturn_t(), node);
+        predicado(mismoTipo(node.getFunDefinition().getReturn_t(), node.getExpression().getType().getClass()),
+                "La expresión a retornar debe ser de tipo " + node.getFunDefinition().getReturn_t(), node);
 
-        node.getDefinition().setReturn(true);
+        node.getFunDefinition().setReturn(true);
 
         return null;
     }
@@ -115,7 +115,7 @@ public class TypeChecking extends DefaultVisitor {
     }
 
     public Object visit(IfElse node, Object param) {
-        boolean hasReturn = node.getDefinition().hasReturn();
+        boolean hasReturn = node.getFunDefinition().hasReturn();
 
         super.visit(node, param);
 
@@ -125,16 +125,18 @@ public class TypeChecking extends DefaultVisitor {
         boolean returnIf = false;
         boolean returnElse = false;
 
-        for (Sentence child : node.getIf_s())
-            if (child instanceof Return)
-                returnIf = true;
+        if (node.getIf_s() != null)
+            for (Sentence child : node.getIf_s())
+                if (child instanceof Return)
+                    returnIf = true;
 
-        for (Sentence child : node.getElse_s())
-            if (child instanceof Return)
-                returnElse = true;
+        if (node.getElse_s() != null)
+            for (Sentence child : node.getElse_s())
+                if (child instanceof Return)
+                    returnElse = true;
 
         if (!hasReturn)
-            node.getDefinition().setReturn(returnIf && returnElse);
+            node.getFunDefinition().setReturn(returnIf && returnElse);
 
         return null;
     }
@@ -151,14 +153,14 @@ public class TypeChecking extends DefaultVisitor {
     public Object visit(FuncInvocation node, Object param) {
         super.visit(node, param);
 
-        predicado(node.getArgs().size() == node.getDefinition().getParams().size(),
+        predicado(node.getArgs().size() == node.getFunDefinition().getParams().size(),
                 "El número de argumentos de " + node.getName() + " no se corresponde con la definición", node);
 
-        if (node.getArgs().size() == node.getDefinition().getParams().size()) {
+        if (node.getArgs().size() == node.getFunDefinition().getParams().size()) {
             for (int i = 0; i < node.getArgs().size(); i++) {
                 predicado(
                         node.getArgs().get(i).getType().getClass()
-                                .equals(node.getDefinition().getParams().get(i).getType().getClass()),
+                                .equals(node.getFunDefinition().getParams().get(i).getType().getClass()),
                         "El tipo del argumento " + node.getArgs().get(i) + " no se corresponde con su definición",
                         node);
             }

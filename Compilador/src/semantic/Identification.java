@@ -50,7 +50,7 @@ public class Identification extends DefaultVisitor {
 
         predicado(definition != null, "Procedimiento no definido: " + node.getName(), node);
 
-        node.setDefinition(definition);
+        node.setFunDefinition(definition);
 
         return null;
     }
@@ -135,7 +135,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }
@@ -144,7 +144,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }
@@ -153,7 +153,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }
@@ -162,7 +162,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }
@@ -186,7 +186,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }
@@ -195,7 +195,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }
@@ -204,7 +204,7 @@ public class Identification extends DefaultVisitor {
         super.visit(node, param);
 
         if (param instanceof FunDefinition)
-            node.setDefinition((FunDefinition) param);
+            node.setFunDefinition((FunDefinition) param);
 
         return null;
     }

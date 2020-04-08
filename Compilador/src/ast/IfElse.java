@@ -57,14 +57,6 @@ public class IfElse extends AbstractSentence {
         this.else_s = else_s;
     }
 
-    public FunDefinition getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(FunDefinition definition) {
-        this.definition = definition;
-    }
-
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
@@ -73,7 +65,6 @@ public class IfElse extends AbstractSentence {
     private Expression expression;
     private List<Sentence> if_s;
     private List<Sentence> else_s;
-    private FunDefinition definition;
 
     public String toString() {
         return "{expression:" + getExpression() + ", if_s:" + getIf_s() + ", else_s:" + getElse_s() + "}";

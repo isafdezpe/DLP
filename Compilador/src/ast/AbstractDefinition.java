@@ -5,5 +5,14 @@
 package ast;
 
 public abstract class AbstractDefinition extends AbstractAST implements Definition {
-    public Definition definition;
+
+    protected int address;
+
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
 }

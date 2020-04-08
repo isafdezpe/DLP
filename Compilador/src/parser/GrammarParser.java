@@ -495,6 +495,9 @@ public class GrammarParser extends Parser {
 
 	public static class TypeContext extends ParserRuleContext {
 		public Type ast;
+		public Token i;
+		public Token f;
+		public Token c;
 		public Token IDENT;
 		public Token INT_CONSTANT;
 		public TypeContext type;
@@ -520,24 +523,24 @@ public class GrammarParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(102);
-				match(T__8);
-				 ((TypeContext)_localctx).ast =  new IntType(); 
+				((TypeContext)_localctx).i = match(T__8);
+				 ((TypeContext)_localctx).ast =  new IntType(); _localctx.ast.setPositions(((TypeContext)_localctx).i); 
 				}
 				break;
 			case T__9:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(104);
-				match(T__9);
-				 ((TypeContext)_localctx).ast =  new RealType(); 
+				((TypeContext)_localctx).f = match(T__9);
+				 ((TypeContext)_localctx).ast =  new RealType(); _localctx.ast.setPositions(((TypeContext)_localctx).f); 
 				}
 				break;
 			case T__10:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(106);
-				match(T__10);
-				 ((TypeContext)_localctx).ast =  new CharType(); 
+				((TypeContext)_localctx).c = match(T__10);
+				 ((TypeContext)_localctx).ast =  new CharType(); _localctx.ast.setPositions(((TypeContext)_localctx).c); 
 				}
 				break;
 			case IDENT:

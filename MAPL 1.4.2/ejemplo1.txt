@@ -1,9 +1,0 @@
-'int a;
-'a = 8;
-pusha 0
-push 8
-store 
-'print a;
-pusha 0
-load
-out

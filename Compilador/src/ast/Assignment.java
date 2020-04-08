@@ -46,14 +46,6 @@ public class Assignment extends AbstractSentence {
         this.right = right;
     }
 
-    public FunDefinition getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(FunDefinition definition) {
-        this.definition = definition;
-    }
-
     @Override
     public Object accept(Visitor v, Object param) {
         return v.visit(this, param);
@@ -61,7 +53,6 @@ public class Assignment extends AbstractSentence {
 
     private Expression left;
     private Expression right;
-    private FunDefinition definition;
 
     public String toString() {
         return "{left:" + getLeft() + ", right:" + getRight() + "}";

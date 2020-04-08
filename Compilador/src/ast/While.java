@@ -39,14 +39,6 @@ public class While extends AbstractSentence {
         this.expression = expression;
     }
 
-    public FunDefinition getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(FunDefinition definition) {
-        this.definition = definition;
-    }
-
     public List<Sentence> getSentence() {
         return sentence;
     }
@@ -62,7 +54,6 @@ public class While extends AbstractSentence {
 
     private Expression expression;
     private List<Sentence> sentence;
-    private FunDefinition definition;
 
     public String toString() {
         return "{expression:" + getExpression() + ", sentence:" + getSentence() + "}";
