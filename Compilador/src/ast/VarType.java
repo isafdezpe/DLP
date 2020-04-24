@@ -71,4 +71,14 @@ public class VarType extends AbstractType {
 
         return size;
     }
+
+    @Override
+    public char getSuffix() {
+        return ' ';
+    }
+
+    @Override
+    public String getMAPLName() {
+        return type;
+    }
 }

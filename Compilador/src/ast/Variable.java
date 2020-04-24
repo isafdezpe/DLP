@@ -33,14 +33,6 @@ public class Variable extends AbstractExpression {
         this.name = name;
     }
 
-    public VarScope getScope() {
-        return scope;
-    }
-
-    public void setScope(VarScope scope) {
-        this.scope = scope;
-    }
-
     public VarDefinition getDefinition() {
         return definition;
     }
@@ -55,7 +47,6 @@ public class Variable extends AbstractExpression {
     }
 
     private String name;
-    private VarScope scope;
     private VarDefinition definition;
 
     public String toString() {

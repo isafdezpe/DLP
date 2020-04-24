@@ -1,0 +1,221 @@
+#source "source.txt"
+call main
+halt
+
+#line 17
+potencia:
+#FUNC potencia
+#RET float
+#PARAM base:float
+#PARAM exponente:int
+#LOCAL total:float
+enter 4
+
+#line 13
+pusha BP
+push 4
+add
+loadi
+push 0
+eqi
+jz else_0
+
+#line 5
+pusha BP
+push -4
+add
+pushf 1.0
+storef
+jmp end_if_else_0
+else_0:
+
+#line 13
+pusha BP
+push 4
+add
+loadi
+push 0
+lti
+jz else_1
+
+#line 8
+pusha BP
+push -4
+add
+pushf 1.0
+pusha BP
+push 6
+add
+loadf
+push 0
+pusha BP
+push 4
+add
+loadi
+subi
+call potencia
+divf
+storef
+jmp end_if_else_1
+else_1:
+
+#line 10
+pusha BP
+push -4
+add
+pusha BP
+push 6
+add
+loadf
+storef
+
+#line 13
+while_0:
+pusha BP
+push 4
+add
+loadi
+push 1
+gti
+jz end_while_0
+
+#line 12
+pusha BP
+push -4
+add
+pusha BP
+push -4
+add
+loadf
+pusha BP
+push 6
+add
+loadf
+mulf
+storef
+
+#line 13
+pusha BP
+push 4
+add
+pusha BP
+push 4
+add
+loadi
+push 1
+subi
+storei
+jmp while_0
+end_while_0:
+end_if_else_1:
+end_if_else_0:
+
+#line 17
+pusha BP
+push -4
+add
+loadf
+ret 4,4,6
+
+#line 25
+letraHipoteca:
+#FUNC letraHipoteca
+#RET float
+#PARAM capital:float
+#PARAM meses:int
+#PARAM interes:float
+#LOCAL mensual:float
+enter 4
+
+#line 24
+pusha BP
+push -4
+add
+pusha BP
+push 4
+add
+loadf
+pushf 12.0
+divf
+storef
+
+#line 25
+pusha BP
+push 10
+add
+loadf
+pusha BP
+push -4
+add
+loadf
+mulf
+pushf 100.0
+pushf 1.0
+pushf 1.0
+pusha BP
+push -4
+add
+loadf
+pushf 100.0
+divf
+addf
+push 0
+pusha BP
+push 8
+add
+loadi
+subi
+call potencia
+subf
+mulf
+divf
+ret 4,4,10
+
+#line 43
+main:
+#FUNC main
+#RET void
+#LOCAL precioVivienda:float
+#LOCAL mesesHipoteca:int
+#LOCAL interes:float
+enter 10
+
+#line 39
+pusha BP
+push -4
+add
+pushf 200000.0
+storef
+
+#line 40
+pusha BP
+push -6
+add
+push 30
+push 12
+muli
+storei
+
+#line 41
+pusha BP
+push -10
+add
+pushf 2.04
+storef
+
+#line 43
+pusha BP
+push -4
+add
+loadf
+pusha BP
+push -6
+add
+loadi
+pusha BP
+push -10
+add
+loadf
+call letraHipoteca
+outf
+ret 0,10,0

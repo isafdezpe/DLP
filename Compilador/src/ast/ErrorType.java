@@ -23,4 +23,14 @@ public class ErrorType extends AbstractType {
     public int getSize() {
         return 0;
     }
+
+    @Override
+    public char getSuffix() {
+        return ' ';
+    }
+
+    @Override
+    public String getMAPLName() {
+        return "";
+    }
 }
