@@ -1,4 +1,4 @@
-struct Pareja {
+struct Pareja { 
   entero:int;
   caracter:char;
 };
@@ -7,7 +7,7 @@ var pareja:Pareja;
 
 struct Empleado { edad:int; };
 
-struct Empresa {
+struct Empresa { 
 	empleados:[2]Empleado;
 };
 
@@ -26,7 +26,7 @@ f(paramReal:float, paramInt:int):int {
   var localReal:float;
   var digito:char;
   var resultado:int;
-
+ 
   localReal = paramReal * 10.0;
   digito = '0';
   if (paramInt < 256) {
@@ -42,7 +42,7 @@ f(paramReal:float, paramInt:int):int {
 
 inicializa() {
   var i:int;
-
+ 
   fibonacci[0][0] = 0;
   fibonacci[0][1] = 1;
   fibonacci[0][2] = 1;
@@ -62,15 +62,15 @@ main(){
   var j:int;
 
   p();
-
+  
   i = 0;
   pareja.caracter = '0';
   pareja.entero = cast<int>('0');
 
-  println f(cast<float>(i), cast<int>(pareja.caracter));  // Sale 48 (cÃ³digo ASCII de '0')
+  println f(cast<float>(i), cast<int>(pareja.caracter));  // Sale 48 (código ASCII de '0')
   f(1.3, 2);
-
-  inicializa();
+ 
+  inicializa(); 
   i = 0;
   while (i < 8) { 	// Salen 8 primeros de Fibonacci (de 1 a 34)
     print '(';
@@ -110,3 +110,4 @@ main(){
     i = i + 1;
   }
 }
+

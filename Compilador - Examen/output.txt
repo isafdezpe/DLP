@@ -1,0 +1,75 @@
+#source "source.txt"
+call main
+halt
+#type Pareja :{
+	entero:int
+	caracter:char
+}
+#GLOBAL pareja:Pareja
+#type Empleado :{
+	edad:int
+}
+#type Empresa :{
+	empleados:2*Empleado
+}
+#GLOBAL acme:2*Empresa
+#GLOBAL fibonacci:8*3*int
+
+#line 28
+main:
+#FUNC main
+#RET void
+#LOCAL i:int
+#LOCAL j:int
+enter 4
+
+#line 25
+pusha BP
+push -2
+add
+push 0
+storei
+
+#line 26
+pusha BP
+push -4
+add
+push 2
+storei
+
+#line 27
+pusha BP
+push -4
+add
+loadi
+pusha BP
+push -2
+add
+loadi
+pusha BP
+push -2
+add
+pusha BP
+push -2
+add
+loadi
+push 1
+add
+store
+addi
+outi
+pushb 10
+outb
+
+#line 28
+pusha BP
+push -4
+add
+loadi
+pusha BP
+push -2
+add
+loadi
+addi
+outi
+ret 0,4,0

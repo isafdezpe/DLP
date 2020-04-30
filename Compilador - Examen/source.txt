@@ -1,0 +1,29 @@
+struct Pareja {
+  entero:int;
+  caracter:char;
+};
+
+var pareja:Pareja;
+
+struct Empleado { edad:int; };
+
+struct Empresa {
+	empleados:[2]Empleado;
+};
+
+
+var acme:[2]Empresa;
+
+
+var fibonacci:[8][3]int;
+
+main(){
+  var i:int;
+  var j:int;
+
+
+  i = 0;
+  j = 2;
+  println j + i++;
+  print j+i;
+}

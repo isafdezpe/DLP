@@ -270,6 +270,19 @@ public class TypeChecking extends DefaultVisitor {
         return null;
     }
 
+    public Object visit(UnarySumExpression node, Object param) {
+        super.visit(node, param);
+
+        predicado(mismoTipo(node.getExpr().getType(), IntType.class), "El operando debe ser de tipo entero", node);
+
+        predicado(node.getExpr().isModificable(), "El operando " + node.getExpr() + " no es modificable", node);
+
+        node.setType(new IntType());
+        node.setModificable(false);
+
+        return null;
+    }
+
     public Object visit(ComparableExpression node, Object param) {
         super.visit(node, param);
 

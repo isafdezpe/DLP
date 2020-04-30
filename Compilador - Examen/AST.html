@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #bebdbd; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Program &rarr;                                                   <span class="pos">1:8  28:11   </span><span class="sourceText">struct </span><span class="posText">Pareja {</span><span class="sourceText"> ... </span><span class="posText">print j+i</span><span class="sourceText">;</span>
+<span class="dots">.  </span>definitions  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  </span>StructDefinition &rarr;                                    <span class="pos">1:8  3:15    </span><span class="sourceText">struct </span><span class="posText">Pareja {</span><span class="sourceText"> ... </span><span class="posText">caracter:char</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"Pareja"  <span class="type">VarType.type</span>                             <span class="pos">1:8  1:13    </span><span class="sourceText">struct </span><span class="posText">Pareja</span><span class="sourceText"> {</span>
+<span class="dots">.  .  |  </span>definitions  <span class="type">List&lt;StructField&gt;</span> = 
+<span class="dots">.  .  |  .  </span>StructField &rarr;                                   <span class="pos">2:3  2:12    </span><span class="sourceText"></span><span class="posText">entero:int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"<span class="value">entero</span>"  
+<span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos">2:10  2:12   </span><span class="sourceText">entero:</span><span class="posText">int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  </span>StructField &rarr;                                   <span class="pos">3:3  3:15    </span><span class="sourceText"></span><span class="posText">caracter:char</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"<span class="value">caracter</span>"  
+<span class="dots">.  .  |  .  |  </span><span class="value">CharType</span> &rarr;                                   <span class="pos">3:12  3:15   </span><span class="sourceText">caracter:</span><span class="posText">char</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">2</span>  <span class="type">int</span>
+<span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">6:5  6:17    </span><span class="sourceText">var </span><span class="posText">pareja:Pareja</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"<span class="value">pareja</span>"  
+<span class="dots">.  .  |  </span>"Pareja"  <span class="type">VarType.type</span>                             <span class="pos">6:12  6:17   </span><span class="sourceText">var pareja:</span><span class="posText">Pareja</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">.  .  </span>StructDefinition &rarr;                                    <span class="pos">8:8  8:26    </span><span class="sourceText">struct </span><span class="posText">Empleado { edad:int</span><span class="sourceText">; };</span>
+<span class="dots">.  .  |  </span>"Empleado"  <span class="type">VarType.type</span>                           <span class="pos">8:8  8:15    </span><span class="sourceText">struct </span><span class="posText">Empleado</span><span class="sourceText"> { edad:int; };</span>
+<span class="dots">.  .  |  </span>definitions  <span class="type">List&lt;StructField&gt;</span> = 
+<span class="dots">.  .  |  .  </span>StructField &rarr;                                   <span class="pos">8:19  8:26   </span><span class="sourceText">struct Empleado { </span><span class="posText">edad:int</span><span class="sourceText">; };</span>
+<span class="dots">.  .  |  .  |  </span>"<span class="value">edad</span>"  
+<span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos">8:24  8:26   </span><span class="sourceText">struct Empleado { edad:</span><span class="posText">int</span><span class="sourceText">; };</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">.  .  </span>StructDefinition &rarr;                                    <span class="pos">10:8  11:22  </span><span class="sourceText">struct </span><span class="posText">Empresa {</span><span class="sourceText"> ... </span><span class="posText">empleados:[2]Empleado</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"Empresa"  <span class="type">VarType.type</span>                            <span class="pos">10:8  10:14  </span><span class="sourceText">struct </span><span class="posText">Empresa</span><span class="sourceText"> {</span>
+<span class="dots">.  .  |  </span>definitions  <span class="type">List&lt;StructField&gt;</span> = 
+<span class="dots">.  .  |  .  </span>StructField &rarr;                                   <span class="pos">11:2  11:22  </span><span class="sourceText"></span><span class="posText">empleados:[2]Empleado</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"<span class="value">empleados</span>"  
+<span class="dots">.  .  |  .  |  </span>ArrayType &rarr;                                  <span class="pos">11:13  11:22 </span><span class="sourceText">empleados:[</span><span class="posText">2]Empleado</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"2"  <span class="type">IntConstant.value</span>                    <span class="pos">11:13  11:13 </span><span class="sourceText">empleados:[</span><span class="posText">2</span><span class="sourceText">]Empleado;</span>
+<span class="dots">.  .  |  .  |  .  </span>"Empleado"  <span class="type">VarType.type</span>                  <span class="pos">11:15  11:22 </span><span class="sourceText">empleados:[2]</span><span class="posText">Empleado</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">15:5  15:19  </span><span class="sourceText">var </span><span class="posText">acme:[2]Empresa</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"<span class="value">acme</span>"  
+<span class="dots">.  .  |  </span>ArrayType &rarr;                                        <span class="pos">15:11  15:19 </span><span class="sourceText">var acme:[</span><span class="posText">2]Empresa</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"2"  <span class="type">IntConstant.value</span>                          <span class="pos">15:11  15:11 </span><span class="sourceText">var acme:[</span><span class="posText">2</span><span class="sourceText">]Empresa;</span>
+<span class="dots">.  .  |  .  </span>"Empresa"  <span class="type">VarType.type</span>                         <span class="pos">15:13  15:19 </span><span class="sourceText">var acme:[2]</span><span class="posText">Empresa</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">3</span>  <span class="type">int</span>
+<span class="dots">.  .  </span>VarDefinition &rarr;                                       <span class="pos">18:5  18:23  </span><span class="sourceText">var </span><span class="posText">fibonacci:[8][3]int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"<span class="value">fibonacci</span>"  
+<span class="dots">.  .  |  </span>ArrayType &rarr;                                        <span class="pos">18:16  18:23 </span><span class="sourceText">var fibonacci:[</span><span class="posText">8][3]int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>"8"  <span class="type">IntConstant.value</span>                          <span class="pos">18:16  18:16 </span><span class="sourceText">var fibonacci:[</span><span class="posText">8</span><span class="sourceText">][3]int;</span>
+<span class="dots">.  .  |  .  </span>ArrayType &rarr;                                     <span class="pos">18:19  18:23 </span><span class="sourceText">var fibonacci:[8][</span><span class="posText">3]int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"3"  <span class="type">IntConstant.value</span>                       <span class="pos">18:19  18:19 </span><span class="sourceText">var fibonacci:[8][</span><span class="posText">3</span><span class="sourceText">]int;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos">18:21  18:23 </span><span class="sourceText">var fibonacci:[8][3]</span><span class="posText">int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span><span class="value">11</span>  <span class="type">int</span>
+<span class="dots">.  .  </span>FunDefinition &rarr;                                       <span class="pos">20:1  28:11  </span><span class="sourceText"></span><span class="posText">main(){</span><span class="sourceText"> ... </span><span class="posText">print j+i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  </span>"<span class="value">main</span>"  
+<span class="dots">.  .  |  </span>params  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">.  .  |  </span><span class="value">VoidType</span> &rarr;                                         <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">.  .  |  </span>definitions  <span class="type">List&lt;VarDefinition&gt;</span> = 
+<span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">21:7  21:11  </span><span class="sourceText">var </span><span class="posText">i:int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"<span class="value">i</span>"  
+<span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos">21:9  21:11  </span><span class="sourceText">var i:</span><span class="posText">int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">-2</span>  <span class="type">int</span>
+<span class="dots">.  .  |  .  </span>VarDefinition &rarr;                                 <span class="pos">22:7  22:11  </span><span class="sourceText">var </span><span class="posText">j:int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"<span class="value">j</span>"  
+<span class="dots">.  .  |  .  |  </span><span class="value">IntType</span> &rarr;                                    <span class="pos">22:9  22:11  </span><span class="sourceText">var j:</span><span class="posText">int</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span><span class="value">-4</span>  <span class="type">int</span>
+<span class="dots">.  .  |  </span>sentences  <span class="type">List&lt;Sentence&gt;</span> = 
+<span class="dots">.  .  |  .  </span>Assignment &rarr;                                    <span class="pos">25:3  25:7   </span><span class="sourceText"></span><span class="posText">i = 0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"i"  <span class="type">Variable.name</span>                           <span class="pos">25:3  25:3   </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> = 0;</span>
+<span class="dots">.  .  |  .  |  </span>"0"  <span class="type">IntConstant.value</span>                       <span class="pos">25:7  25:7   </span><span class="sourceText">i = </span><span class="posText">0</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>Assignment &rarr;                                    <span class="pos">26:3  26:7   </span><span class="sourceText"></span><span class="posText">j = 2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>"j"  <span class="type">Variable.name</span>                           <span class="pos">26:3  26:3   </span><span class="sourceText"></span><span class="posText">j</span><span class="sourceText"> = 2;</span>
+<span class="dots">.  .  |  .  |  </span>"2"  <span class="type">IntConstant.value</span>                       <span class="pos">26:7  26:7   </span><span class="sourceText">j = </span><span class="posText">2</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  </span>Println &rarr;                                       <span class="pos">27:11  27:17 </span><span class="sourceText">println </span><span class="posText">j + i++</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>ArithmeticExpression &rarr;                       <span class="pos">27:11  27:17 </span><span class="sourceText">println </span><span class="posText">j + i++</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"j"  <span class="type">Variable.name</span>                        <span class="pos">27:11  27:11 </span><span class="sourceText">println </span><span class="posText">j</span><span class="sourceText"> + i++;</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  </span>"i"  <span class="type">Variable.name</span>                        <span class="pos">27:15  27:15 </span><span class="sourceText">println j + </span><span class="posText">i</span><span class="sourceText">++;</span>
+<span class="dots">.  .  |  .  </span>Print &rarr;                                         <span class="pos">28:9  28:11  </span><span class="sourceText">print </span><span class="posText">j+i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  </span>ArithmeticExpression &rarr;                       <span class="pos">28:9  28:11  </span><span class="sourceText">print </span><span class="posText">j+i</span><span class="sourceText">;</span>
+<span class="dots">.  .  |  .  |  .  </span>"j"  <span class="type">Variable.name</span>                        <span class="pos">28:9  28:9   </span><span class="sourceText">print </span><span class="posText">j</span><span class="sourceText">+i;</span>
+<span class="dots">.  .  |  .  |  .  </span>"<span class="value">+</span>"  
+<span class="dots">.  .  |  .  |  .  </span>"i"  <span class="type">Variable.name</span>                        <span class="pos">28:11  28:11 </span><span class="sourceText">print j+</span><span class="posText">i</span><span class="sourceText">;</span>
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>
